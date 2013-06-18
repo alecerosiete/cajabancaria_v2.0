@@ -1,0 +1,73 @@
+	
+/* Adjusting the margins, paddings and no list styles */
+.navigation  {
+        margin:0; 
+        padding:0; 
+        list-style:none;
+
+}	
+
+/* Little tricking with positions */
+.navigation  li {
+        float:left;			
+        width:16.66666%; 
+        position:relative; 
+}
+
+/* Playing with Main Categories */
+.navigation  li a {
+        background:#FFF; 
+        color:#078116;
+        display:block;  	
+        padding:8px 7px 8px 7px; 
+        text-decoration:none;
+        
+        text-align:center; 
+
+        border-left: 1px solid rgba(255,255,255,.75);
+          border-right: 1px solid rgba(0,0,0,.1);
+}
+
+.navigation  li a:hover {
+        color:#083E63;
+        background: #E9E9E9;
+        text-shadow: 0 1px 1px #FFF;
+        border-bottom:1px solid #F2861D;
+        
+}
+
+/* Sub Cat Menu stuff*/
+.navigation  ul {
+        position:absolute; 
+        left:0; 
+        display:none; /* Hide it by default */
+        margin:0 0 0 -1px; 
+        padding:0; 
+        list-style:none;
+        border-bottom:1px solid #F2861D;
+}
+
+.navigation  ul li {
+        width:100%; 
+        float:left; 
+        border-top:none;
+}
+
+/* Sub Cat menu link properties */
+.navigation  ul a {
+        display:block;    	/* Making sure a element covers whole li area */
+        height:13px;
+        padding:7px 7px 13px 7px; 
+        color:#078116;
+        text-decoration:none;	
+        border-top:none;
+        border-bottom:1px solid #E5E5FF;
+}
+
+.navigation  ul a:hover {
+        color:#083350;
+        border-bottom:2px solid #E5E5FF;
+        text-shadow: 0 1px 1px #FFF;
+       
+
+}
