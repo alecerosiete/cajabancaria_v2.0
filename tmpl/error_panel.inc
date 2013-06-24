@@ -2,7 +2,6 @@
 if(hasErrors()) {
 ?>
 <div id="error-panel" style="z-index: 2;">
-  <h3>Problemas encontrados!</h3>
 
       <?php
       foreach($_SESSION[S_ERROR_LIST] as $item ) {

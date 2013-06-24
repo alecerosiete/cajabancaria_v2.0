@@ -8,6 +8,6 @@ require '../inc/sql-functions.php';
 $ci = $_POST['ci'];
 
 $action = activateUserState($ci);
-setSuccess($action == 1 ? "Activado con exito" : "Desactivado con exito");
+setSuccess($action > 0 ? "Activado con exito" : "Desactivado con exito");
 echo $action;
 ?>

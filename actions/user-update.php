@@ -34,7 +34,7 @@ $perfil = consultaPerfil($ci);
 
     <tbody>
       <?php        
-      $activeLabel = $perfil['active']==1 ? 'Desactivar' : 'Activar';
+      $activeLabel = $perfil['active']>0 ? 'Desactivar' : 'Activar';
       ?>
         <tr>
           <td style="text-align: center"><?=$perfil['nombre']?></td>
@@ -128,8 +128,8 @@ $perfil = consultaPerfil($ci);
                     
                     </table>
                 <div class="modal-footer">
-                   <button href="#" id="btn-update-user-data" class="btn btn-success">Guardar</button>
-                   <button href="#" id="user-data-edit-close" data-dismiss="modal" class="btn">Cerrar</button>
+                   <a href="#" id="btn-update-user-data" class="btn btn-success">Guardar</a>
+                   <a href="#" id="user-data-edit-close" data-dismiss="modal" class="btn">Cerrar</a>
                </div>
                </div>
              </div>
@@ -146,7 +146,7 @@ $perfil = consultaPerfil($ci);
            <div class="modal-body">
                 <table class="table table-striped" style="alignment-adjust: center">
                     <div align="center">
-                      <input type="hidden" id="ci-update" value="<?=$ci?>">
+                      <input type="hidden" id="ci" value="<?=$ci?>">
                       <div id='btn-generate-pin' class='btn btn-success'>Generar PIN</div>
                       <div id='show-pin'></div><br>
                       <div id="btn-save-pin" class='btn btn-success'>Guardar</div>

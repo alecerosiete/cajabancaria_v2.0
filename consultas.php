@@ -48,13 +48,13 @@ $db = conect();
           
 <div class="hero-unit">
     <?php if(getPerfil(ROLE_DIRECTIVO)) { ?>
-    
+
     <table class="table">
         <tr>
             <td>
-                <form class="form-search" style="margin-top:30px;">
+                <form class="form-search" style="margin-top:30px;" onSubmit="consultar();return false">
                     <input id="input-ci" placeholder="Cedula de identidad.." type="text" class="input-xlarge search-query">
-                    <button type="button" class="btn" id="btn-consultar">Buscar</button>
+                    <button type="submit" class="btn" id="btn-consultar" >Buscar</button>
                 </form>
             </td>
             <td>
@@ -65,7 +65,7 @@ $db = conect();
       
     <hr style="border: 1px solid #E35300">
     <div id="visualizar-consulta"></div>
-     
+  
       
      
 </div><!-- /end hero-unit -->

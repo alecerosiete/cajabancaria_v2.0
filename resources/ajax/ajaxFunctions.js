@@ -1,6 +1,50 @@
 $(document).ready(function(){
     /* PDDIRWEB DATA CHARGING */
     
+    /* Pin changing proccess*/	
+    $('#btn-save-new-pin').click(function(){
+        
+        var ci = $("#ci").val();
+        var pin = $("#pin").val();
+        var newPin = $("#newPin").val();             
+        var confirmNewPin = $("#confirmNewPin").val();
+        
+        //Pin no puede ser vacio
+        if(ci == "" || pin == "" || newPin == "" || confirmNewPin == "" || newPin != confirmNewPin){
+            //Pin se debe confirmar
+            if(newPin != confirmNewPin){
+                alert("La confirmacion no coincide con su nuevo Pin");
+            }else{
+                alert("Todos los campos son requeridos");
+            }
+            
+        }else if(newPin.length < 4 || confirmNewPin.length < 4){ //la longitud minima es de 4 numeros
+                alert("Pin no es valido, ingrese un pin de 4 digitos")
+        }else{
+        
+        $.ajax({
+           type: "POST",
+           url: "./actions/save-new-pin-process.php",
+           data: {
+               ci:ci,
+               pin:pin,
+               newPin:newPin
+           }
+           }).done(function(resp) {
+               if(resp == 0){
+                   alert("Su Pin actual es incorrecto");
+               }else{
+                    $("#modalChangePin").modal('hide');
+                    window.location = "./index.php";
+                    
+               }
+               
+           });
+        }
+    })
+    /* Fin gaurdar pin */
+
+
     /* Boton guardar info de banner */
     $('#btn-guardar-banner').click(function(){
        
@@ -12,13 +56,16 @@ $(document).ready(function(){
         var validos = ["jpg", "png", "gif","jpeg"];
         if($.inArray(extension, validos) == -1){
             alert("Formato inválido de imagen, especifique otra imagen");
-
+            return false;
         }else if(titulo.length == 0){
             alert("Especifique un titulo");
+            return false;
         }else if(texto.length == 0){
             alert("Especifique un texto");
+            return false;
         }else{
-            uploadFile('banner','archivo');        
+            //uploadFile('banner','archivo');        
+            
             $.ajax({
                type: "POST",
                url: "./actions/save-banner-novedades.php",
@@ -28,12 +75,12 @@ $(document).ready(function(){
                    nombre_imagen:nombre_imagen
 
                }
-               }).done(function() {
-
-                   alert("Guardado");
-                   window.location = "./banner-admin.php";
-               });
+            })
+           
+           
         }
+        
+       
     });
     
     
@@ -69,10 +116,10 @@ $(document).ready(function(){
     
     /* Guardar pin */
     $('#btn-save-pin').click(function(){
-       
-        var ci = $("#ci-update").val();
+        
+        var ci = $("#ci").val();
         var pin = $("#show-pin").text();
-
+        
         $.ajax({
            type: "POST",
            url: "./actions/save-pin-process.php",
@@ -82,9 +129,9 @@ $(document).ready(function(){
            }
            }).done(function() {
                alert("Guardado")
-
+               
            });
-             
+           
     })
     /* Fin gaurdar pin */
     
@@ -183,36 +230,10 @@ $(document).ready(function(){
     
     /* Mostrar datos de consulta */
     $('#btn-consultar').click(function(){
-        //alert("procesado...")
-        //var rows = $("#tipoLocal").val();
-        var ci = $("#input-ci").val()
-        if( !(ci)){
-            alert("Ingrese un numero de cedula valido")
-            exit();
-
-        }else{
-    
-            var $loading = $('#visualizar-consulta').html("<div class='progress progress-striped active'><div class='bar' style='width: 100%;'>Cargando.. </div></div>");
-
-             $.ajax({
-                type: "POST",
-                url: "/portal2/actions/listaConsulta.php",
-                
-                data: {
-                    ci:ci
-
-                }
-                }).done(function( data ) {
-                    if(data == false){
-                        data = "<div class='alert alert-warning'>No se encontro ningun registro..</div>";
-                    }
-                    $loading.html(data);
-
-             });
-        }
+        consultar();
     })
     
-    
+
     
     /* Listar Datos Reservacion */
     $('#btn-get-reservas').click(function(){
@@ -297,3 +318,55 @@ function btn_borrar_banner(id){
     });
 }
 
+
+function consultar(){
+		//alert("procesado...")
+        //var rows = $("#tipoLocal").val();
+        var ci = $("#input-ci").val()
+        if( !(ci)){
+            alert("Ingrese un numero de cedula valido")
+            
+
+        }else{
+    
+            var $loading = $('#visualizar-consulta').html("<div class='progress progress-striped active'><div class='bar' style='width: 100%;'>Cargando.. </div></div>");
+
+             $.ajax({
+                type: "POST",
+                url: "/portal2/actions/listaConsulta.php",
+                
+                data: {
+                    ci:ci
+
+                }
+                }).done(function( data ) {
+                    if(data == false){
+                        data = "<div class='alert alert-warning'>No se encontro ningun registro..</div>";
+                    }
+                    $loading.html(data);
+
+             });
+        }		
+
+}
+
+function verifyChangePin(){
+        var ci = $("#ci").val();
+
+	$.ajax({
+           type: "POST",
+           url: "./actions/verify-pin-change.php",
+           data: {
+               ci:ci,
+
+           }
+           }).done(function(resp) {
+               if(resp == 1){
+                   $("#modalChangePin").modal('show');
+                   $('#ayudaCambioDePin').popover()
+               }
+               
+           });
+	
+	
+}

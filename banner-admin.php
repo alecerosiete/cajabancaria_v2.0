@@ -252,13 +252,13 @@ $role = getRole(ROLE_PENSIONADO);
                         <H3>Agregar contenido de banner</H3>
                         <hr style="border: 1px solid #E35300">
                         
-            
+                        <form action="./actions/save-banner-action.php" method="POST" id="form-upload-banner" enctype="multipart/form-data">
                             <div class="text-novedades-preview">
                                 <label>Titulo para el banner</label><input type="text" id="titulo-banner" style="width:300px" placeholder="Ingrese un titulo">
                                 <label>Descripcion para el banner</label><textarea id="texto-banner" style="width:300px" rows="8"></textarea>
                                  <div>
 
-                                    <input type="button"  class="btn"  id="btn-guardar-banner" value="Guardar">
+                                    <input type="submit" class="btn"  id="btn-guardar-banner" value="Guardar">
                                     <div style="clear: both"></div>
                                 </div>
                             </div>
@@ -289,6 +289,7 @@ $role = getRole(ROLE_PENSIONADO);
                             Suba una imagen con un tamaño aproximado de <span class="label label-info">670x300 pixeles</span> para su mejor visualizacion.
                             <div style="clear: both"></div>
                         </div>
+                      </form>
                     </div>
                      
                   </div>

@@ -1,6 +1,18 @@
 <?php
 require_once '../inc/session.inc';
 require_once '../inc/conexion-functions.php';
+include_once '../resources/securimage/securimage.php';
+
+//Verifica captcha
+$securimage = new Securimage();
+if ($securimage->check($_POST['captcha_code']) == false) {
+    //echo "<div class='alert alert-danger'>El codigo de seguridad ingresado no es valido, por favor intentelo nuevamente volviendo atras.<br><a class='btn' href='javascript:history.go(-1)'>Atras</a></div>";
+    addError("El codigo de seguridad ingresado no es valido, por favor intentelo nuevamente.");
+    redirect(ROOT_PATH."/login.php");
+    exit;
+}
+
+
 $db = conect();
 $ci = $_POST['ci'];
 $pin = $_POST['pin'];
@@ -16,7 +28,7 @@ if( !empty($ci) && !empty($pin) ) {
      */
     //$sql = "SELECT *, u.ci as ci FROM sys_user AS u, sys_group AS g WHERE u.active = 1 AND u.tipo_de_usuario = g.nombre_de_grupo AND u.ci = ? AND u.password=?";
     
-    $sql = "SELECT *,u.ci as ci FROM sys_user AS u, sys_group AS g, sys_profile AS p WHERE u.active = 1 AND u.tipo_de_usuario = g.nombre_de_grupo AND u.perfil_de_usuario = p.perfil AND u.ci = ? AND u.password = ?";
+    $sql = "SELECT *,u.ci as ci FROM sys_user AS u, sys_group AS g, sys_profile AS p WHERE u.active > 0 AND u.tipo_de_usuario = g.nombre_de_grupo AND u.perfil_de_usuario = p.perfil AND u.ci = ? AND u.password = ?";
     $statement = $db->prepare($sql);
     /*Nueva consulta para acceso por roles
      * 

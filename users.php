@@ -53,9 +53,9 @@ $user = getUser();
             <table class="table">
                 <tr>
                     <td>
-                        <form class="form-search" style="margin-top:30px;">
-                            <input id="input-ci" placeholder="Cedula de identidad.." type="text" class="input-xlarge search-query">
-                            <button type="button" class="btn" id="btn-user-update">Buscar</button>&nbsp;&nbsp;<?php /*<a class="btn btn-success" href="./user-insert.php">Nuevo usuario</a>*/?>
+                        <form class="form-search" style="margin-top:30px;" onSubmit="consultar();return false">
+                            <input id="input-ci" placeholder="Cedula de identidad.."  type="text" class="input-xlarge search-query">
+                            <button type="submit" class="btn" id="btn-user-update">Buscar</button>&nbsp;&nbsp;<?php /*<a class="btn btn-success" href="./user-insert.php">Nuevo usuario</a>*/?>
                         </form>
                     </td>
                     <td>
@@ -76,14 +76,14 @@ $user = getUser();
           }
           ?>    
         </div><!-- /end hero-unit -->
- <hr>
+    <hr>
     <footer>
         <div class="footer">
              Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2012 - Todos los Derechos Reservados
      www.cajabancaria.gov.py <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
         </div> 
     </footer>
-<hr>         
+    <hr>         
       </div> <!-- /container -->
     
       

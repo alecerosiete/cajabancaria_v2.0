@@ -57,7 +57,11 @@ session_destroy();
       <form class="form-signin" action="./actions/login.do.php" method="post">
         <h2 class="form-signin-heading" >Acceso al sistema</h2>
         <input id="ci" type="text" class="input-block-level" placeholder="Cedula de Identidad" name="ci">
-        <input id="pin"type="password" class="input-block-level" placeholder="Pin.." name="pin">
+        <input id="pin" type="password" class="input-block-level" placeholder="Pin.." name="pin">
+        <img align="left" style="width:172px;margin-bottom: 10px" id="captcha" src="./resources/securimage/securimage_show.php" alt="CAPTCHA Image" />
+        <a style="margin-top:20px;margin-left: 10px;" class="label label-info btn-warning" href="#" onclick="document.getElementById('captcha').src = './resources/securimage/securimage_show.php?' + Math.random(); return false"> Cambiar la imagen </a>                 
+        <input  type="text" id="codigo" placeholder="Codigo de seguridad" name="captcha_code" size="10" maxlength="6" style="width:180px"/>
+        <a href="#ayudaCaptcha" class="label label-info btn-info" style='display:inline;float:right;margin-top: 8px;' data-toggle="popover" data-placement="bottom" data-content="Verifica la interaccion Humano - Sistema evitando asi el ingreso de informacion de forma automática con algún programa, robot o con clicks automátizados.." title="" data-original-title="" id="ayudaCaptcha">¿Que es esto?</a>
         <button class="btn btn-large btn-primary" type="submit">Entrar</button>
         
         
@@ -84,7 +88,7 @@ session_destroy();
 	  autoAccept : true 
 	 }) 
 	 .addTyping();
-        
+        $('#ayudaCaptcha').popover()
         </script>
   </body>
 </html>

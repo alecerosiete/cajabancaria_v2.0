@@ -312,3 +312,12 @@ function getBannerTitle(){
     $db = null;
     return $news_text['news_text'];
 }
+
+function updateUserPin($ci,$newPin){
+    $db = conect();
+    $sql = "UPDATE sys_user SET password = ?,active = 2 WHERE ci = ?";
+    error_log($sql);
+    $statement = $db->prepare($sql);
+    $statement->execute(array($newPin,$ci));
+    $db = null;
+}

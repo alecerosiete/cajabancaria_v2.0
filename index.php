@@ -17,7 +17,6 @@ $localidad = getLocalidad($userInfo[0]['LOCALIDAD']);
 
 $barrio = getBarrio($userInfo[0]['BARRIO']);
 
-
 $role = getRole(ROLE_PENSIONADO);
 
 //print_r($role);
@@ -31,6 +30,8 @@ $role = getRole(ROLE_PENSIONADO);
     <meta name="description" content="">
     <meta name="author" content="">
     <?php require './inc/header.php'; ?>
+    <link href="./resources/bootstrap/assets/css/jquery-ui.css" rel="stylesheet">
+    <link href="./resources/bootstrap/assets/css/keyboard.css" rel="stylesheet">
     <style type="text/css">
         
       .carousel {
@@ -64,7 +65,41 @@ $role = getRole(ROLE_PENSIONADO);
         line-height: 20px;
         text-align: right;
         }
+
+      body {
+          margin-top: 0px;
+
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin .form-signin-heading,
+      .form-signin .checkbox {
+        margin-bottom: 10px;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+
       </style>
+      
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
@@ -93,6 +128,7 @@ $role = getRole(ROLE_PENSIONADO);
       
       <!-- Formulario de Datos Personales -->         
       <div class="hero-unit">
+          
         <H3 style="text-align:right;color:#E35300;margin-bottom:-20px">Datos personales</h3>
             <hr style="border: 1px solid #E35300">
         <table id="personal-data" class="table table-striped" style="font-size:12px">
@@ -138,6 +174,7 @@ $role = getRole(ROLE_PENSIONADO);
           </table>
         <input type="hidden" value='<?=$userInfo[0]['CEDULA DE IDENTIDAD']?>' id='ci-info'>
         <p align="right">
+        <a id="modal-change-pin"  data-toggle="modal" href="#modalChangePin" class="btn btn-primary">Cambiar mi PIN</a>
             <a id="modal-edit-user-data"  data-toggle="modal" href="#modalUserData" class="btn btn-primary">Modificar mis datos</a>
         </p>
       </div>
@@ -197,9 +234,6 @@ $role = getRole(ROLE_PENSIONADO);
                           ?>
                         </select>
                           
-                          
-                         
-                    
                     </tr>
                      
                     <tr>
@@ -244,8 +278,8 @@ $role = getRole(ROLE_PENSIONADO);
                     </tr>
                </table>
            <div class="modal-footer">
-              <button href="#" id="btn-edit-user-data" class="btn btn-success">Guardar</button>
-              <button href="#" id="user-data-edit-close" data-dismiss="modal" class="btn">Cerrar</button>
+              <a href="#" id="btn-edit-user-data" class="btn btn-success">Guardar</a>
+              <a href="#" id="user-data-edit-close" data-dismiss="modal" class="btn">Cerrar</a>
           </div>
           </div>
         </div>
@@ -312,29 +346,26 @@ $role = getRole(ROLE_PENSIONADO);
                             <p class="lead"> <?= $banner['news_banner_text'] ?></p>
 
                         </div>
-
-                        
+                      
                         
                         <?php
                         echo "</div>";
                         
-                    }       
+                    }                      
                   
-                  
-                 ?>                               
-                 
+                 ?>                                        
              </div>
               <?php
-				if (empty($a_banner)){
-					echo "<div class='alert alert-danger'>No se encontro ningun banner </div>";
-					
-				}else{                        
-				?>
-				  <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-				  <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-				 <?php
-				}
-				?>
+                if (empty($a_banner)){
+                        echo "<div class='alert alert-danger'>No se encontro ningun banner </div>";
+
+                }else{                        
+                ?>
+                  <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                  <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+                 <?php
+                }
+                ?>
            </div>
            <!-- /.carousel -->
            </div>
@@ -353,9 +384,40 @@ $role = getRole(ROLE_PENSIONADO);
     </div> <!-- /container -->
     
     
+    <input type="hidden" id="ci" value="<?= $userInfo[0]['CEDULA DE IDENTIDAD'] ?>">
+    
+    <!-- Modal Modificar pin -->
+       
+        <div id="modalChangePin" class="modal hide fade in" style="display: none;">
+           <div class="modal-header">
+              <a data-dismiss="modal" class="close">×</a>
+              <h3 style='display:inline'>Modificacion del PIN de acceso </h3><a style='display:inline;s' href="#" class="btn btn-mini" data-toggle="popover" data-placement="bottom" data-content="Para aumentar la seguridad de su cuenta, le solicitamos el cambio de su PIN actual. Al cambiarlo guarde en un lugar seguro." title="" data-original-title="" id="ayudaCambioDePin">¿Que es esto?</a>
+           </div>
+            <div class="modal-body">
+                <form class="form-signin" > 
+                    <label>Pin Actual: </label>
+                    <input id="pin" type="password" class="input-block-level" placeholder="Pin actual..">
+                    <label>Nuevo Pin: </label>
+                    <input id="newPin" type="password" class="input-block-level" placeholder="Nuevo Pin..">
+                    <label>Confirme su nuevo Pin: </label>
+                    <input id="confirmNewPin" type="password" class="input-block-level" placeholder="Confirme su nuevo Pin.." name="pin">
 
-    
-    
+                </form>
+                
+                <div  style="width: 500px;margin-left: auto;margin-right: auto;">
+                   
+                    <?php include("./tmpl/error_panel.inc")?>
+                    <?php include("./tmpl/success_panel.inc")?>
+                </div>
+            </div> <!-- /container -->
+           <div class="modal-footer">
+               <div class="alert alert-info" style="width:500px;float:left;font-size:11px">Al guardar estoy aceptando todos los terminos y condiciones de uso del portal de la Caja Bancaria. <a href="#">Terminos y Condiciones</a></div>
+                <a href="#" id="btn-save-new-pin" class="btn btn-success">Guardar</a>
+                <a href="#" id="user-change-pin-close" data-dismiss="modal" class="btn">Cerrar</a>
+           </div>
+          </div>
+        
+        <!-- Fin Modal Cambio de pin-->
     <?php require './inc/footer.php'; ?>
     <script>
       !function ($) {
@@ -366,23 +428,54 @@ $role = getRole(ROLE_PENSIONADO);
       }(window.jQuery)
     </script>
     <script type="text/javascript">
-            // Executes the function when DOM will be loaded fully
-            $(document).ready(function () {	
-                    // hover property will help us set the events for mouse enter and mouse leave
-                    $('.navigation li').hover(
-                            // When mouse enters the .navigation element
-                            function () {
-                                    //Fade in the navigation submenu
-                                    $('ul', this).fadeIn(); 	// fadeIn will show the sub cat menu
-                            }, 
-                            // When mouse leaves the .navigation element
-                            function () {
-                                    //Fade out the navigation submenu
-                                    $('ul', this).fadeOut();	 // fadeOut will hide the sub cat menu		
-                            }
-                    );
-            });
+        // Executes the function when DOM will be loaded fully
+        $(document).ready(function () {	
+                // hover property will help us set the events for mouse enter and mouse leave
+                $('.navigation li').hover(
+                        // When mouse enters the .navigation element
+                        function () {
+                                //Fade in the navigation submenu
+                                $('ul', this).fadeIn(); 	// fadeIn will show the sub cat menu
+                        }, 
+                        // When mouse leaves the .navigation element
+                        function () {
+                                //Fade out the navigation submenu
+                                $('ul', this).fadeOut();	 // fadeOut will hide the sub cat menu		
+                        }
+                );
+        });
         </script>
         <script src="./resources/ajax/ajaxFunctions.js"></script>
+        <script type="text/javascript">
+		verifyChangePin();
+        </script>
+        <script src="./resources/bootstrap/assets/js/jquery.keyboard.js"></script>
+        <script src="./resources/bootstrap/assets/js/jquery.mousewheel.js"></script>
+        <script src="./resources/bootstrap/assets/js/jquery.keyboard.extension-typing.js"></script>
+        <script type="text/javascript">
+	$('#pin').keyboard({ 
+	  layout : 'num', 
+	  lockInput    : true,
+	  restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in 
+	  preventPaste : true,  // prevent ctrl-v and right click 
+	  autoAccept : true 
+	 }) 
+         $('#newPin').keyboard({ 
+	  layout : 'num', 
+	  lockInput    : true,
+	  restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in 
+	  preventPaste : true,  // prevent ctrl-v and right click 
+	  autoAccept : true 
+	 }) 
+         $('#confirmNewPin').keyboard({ 
+	  layout : 'num', 
+	  lockInput    : true,
+	  restrictInput : true, // Prevent keys not in the displayed keyboard from being typed in 
+	  preventPaste : true,  // prevent ctrl-v and right click 
+	  autoAccept : true 
+	 }) 
+	 .addTyping();
+        
+        </script>
   </body>
 </html>

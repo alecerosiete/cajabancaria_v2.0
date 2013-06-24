@@ -6,17 +6,12 @@ require '../inc/sql-functions.php';
 
 $uploaddir = '../resources/images/banner/'; 
 //exec("rm ../audio/introduction.*");
-$file = $uploaddir.string2url(basename($_FILES['archivo']['name'])); 
-echo("nombre: ".$file);
-if (move_uploaded_file($_FILES['archivo']['tmp_name'], $file)) { 
-    exec("chmod 777 -R ".$uploaddir);	
-    echo "success"; 
-    
-    
-} else {
-	echo "error al subir audio";
-}
+$file = $uploaddir.string2url(basename($_FILES['banner']['name'])); 
+//echo("nombre: ".$file);
+if (!move_uploaded_file($_FILES['banner']['tmp_name'], $file)) { 
+   addError("Error al cargar el Banner, intentelo nuevamente");
+} 
 //exec("chmod 777 ../audio/*");
-
-exit();
-?>
+$url = "../banner-admin.php";
+//redirect($url);
+header('Location: '.$url);

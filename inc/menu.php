@@ -45,8 +45,14 @@
                     <?php
                     } 
                     ?>
-                    <li><a href="./reservaciones.php">Reservaciones</a></li>
-                    <li><a href="#">Inmuebles</a></li>
+                         
+                    <li><a href="#">Links de interes</a>
+                        <ul>
+                            <li><a href="./reservaciones.php">Reservaciones</a></li>
+                            <li><a href="#">Inmuebles</a></li>
+                        </ul>
+                    </li>
+                    <li><a href='./contacto.php'>Contacto</a></li>
                     
                 </ul>
 
