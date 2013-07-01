@@ -1,6 +1,7 @@
 <?php
 require_once '../inc/session.inc';
 require_once '../inc/conexion-functions.php';
+include '../inc/sql-functions.php';
 include_once '../resources/securimage/securimage.php';
 
 //Verifica captcha
@@ -43,8 +44,10 @@ if( !empty($ci) && !empty($pin) ) {
 
     if( $item = $statement->fetch(PDO::FETCH_ASSOC) ) {
         setSuccess("Ha ingresado Correctamente!");
-        //setUser($item['PADRON'], $item);
+        //guarda los datos en sesion
         setUser($item['ci'], $item);
+        //guarda los datos para auditoria
+        addUserAuditInfo("login");
         $db = null;
         redirect(ROOT_PATH."/index.php");
       } else {

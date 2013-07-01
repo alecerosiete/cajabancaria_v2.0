@@ -304,7 +304,7 @@ function getTextoNovedades(){
 
 function getBannerTitle(){
     $db = conect();
-    $sql = "SELECT  FROM news";
+    $sql = "SELECT * FROM news";
     $statement = $db->prepare($sql);
     $statement->execute();
     $news_text = $statement->fetch(PDO::FETCH_ASSOC);
@@ -320,4 +320,55 @@ function updateUserPin($ci,$newPin){
     $statement = $db->prepare($sql);
     $statement->execute(array($newPin,$ci));
     $db = null;
+}
+
+function addUserAuditInfo($action){
+        /* Solo se ejecuta al inicio de sesion y fin de sesion */
+    $user = getUser();
+    
+    $db = conect();
+    if($action == "login"){
+         $ip = getClientIP();
+         $sql = "INSERT INTO `audit`(`user_id`, `profile`, `group`, `conexion_date`,  `terminal_ip`) VALUES (:user_id,:profile,:group,now(),:terminal_ip)";
+         $statement = $db->prepare($sql);
+         $statement->bindValue(':user_id', $user['CI']);
+         $statement->bindValue(':profile', $user['data']['perfil']);
+         $statement->bindValue(':group', $user['data']['nombre_de_grupo']);
+         $statement->bindValue(':terminal_ip', $ip);
+         $statement->execute();
+         error_log($sql);
+      }elseif ($action == "logout") {
+        /* obtiene el id del usuario logeado */
+        $sql = "SELECT MAX(id) AS id FROM audit WHERE user_id = :user_id ";
+        $statement = $db->prepare($sql);
+        $statement->bindValue(':user_id', $user['CI']);
+        $statement->execute();
+        $user_audit_id = $statement->fetch(PDO::FETCH_ASSOC);
+        
+        $sql = "UPDATE audit SET desconexion_date = now() WHERE id = :user_id ";
+        $statement = $db->prepare($sql);
+        $statement->bindValue(':user_id', $user_audit_id['id']);
+        $statement->execute();
+        
+    }
+   
+   $db = null;   
+    
+}
+
+function getClientIP(){
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        return $_SERVER['HTTP_CLIENT_IP'];
+       
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        return $_SERVER['HTTP_X_FORWARDED_FOR'];
+   
+    return $_SERVER['REMOTE_ADDR'];
+}
+
+
+function addEventAuditInfo(){
+    /* Agrega todas las actividades del usuario mientras se mantiene en sesion */
+    
+    
 }

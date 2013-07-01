@@ -2,9 +2,11 @@
 require './inc/session.inc';
 assertUser();
 $user = getUser();
-//print_r($user);
+
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
+
+
 
 $db = conect();
 $tipo_usuario = $user['data']['tipo_de_usuario'];
@@ -65,7 +67,7 @@ $role = getRole(ROLE_PENSIONADO);
         line-height: 20px;
         text-align: right;
         }
-
+       
       body {
           margin-top: 0px;
 
@@ -110,7 +112,7 @@ $role = getRole(ROLE_PENSIONADO);
     <div class="container">
       <div class="header-caja-bancaria">
           <div class="btn-logout">
-            Conectado como: <?=$user['data']['nombre']?> <a href="./login.php" class="btn btn-warning">Salir</a>
+            Conectado como: <?=$user['data']['nombre']?> <a href="./actions/login.exit.php" class="btn btn-warning">Salir</a>
           </div>
           <div class="alert-msg-show">
             <?php include("./tmpl/success_panel.inc")?>
@@ -121,52 +123,48 @@ $role = getRole(ROLE_PENSIONADO);
         <?php require './inc/menu.php'; ?>
         <!-- end menu -->
       </div>
-      <!-- Tipo de cliente 
-      B = Beneficiario
-      P = Particular
-      -->
-      
+
       <!-- Formulario de Datos Personales -->         
       <div class="hero-unit">
           
         <H3 style="text-align:right;color:#E35300;margin-bottom:-20px">Datos personales</h3>
             <hr style="border: 1px solid #E35300">
-        <table id="personal-data" class="table table-striped" style="font-size:12px">
+        <table id="personal-data" class="table table-striped data-user-info" style="font-size:12px">
             <tbody>
               <tr>
-                <th>Tipo de usuario: </th><td><?= $user['data']['tipo_de_usuario']?> </td>
-                <th>Padron: </th><td><?= $userInfo[0]['PADRON'] ?></td>
-                <th>Banco: </th><td colspan="2"><?= $userInfo[0]['NOMBREBANCO'] ?></td>
+                <th style="text-align:left">Tipo de usuario: </th><td><?= $user['data']['tipo_de_usuario']?> </td>
+                <th style="text-align:left">Padron: </th><td><?= $userInfo[0]['PADRON'] ?></td>
+                <th style="text-align:left">Banco: </th><td colspan="2"><?= $userInfo[0]['NOMBREBANCO'] ?></td>
                 
               </tr>
               <tr>
-                <th>Cedula de Id: </th><td><?= $userInfo[0]['CEDULA DE IDENTIDAD'] ?></td>
-                <th>Nombre: </th><td><?= $userInfo[0]['NOMBRE'] ?></td>
-                <th>Apellido: </th><td colspan="2"><?= $userInfo[0]['APELLIDO'] ?></td>
+                <th style="text-align:left">Cedula de Id: </th><td><?= $userInfo[0]['CEDULA DE IDENTIDAD'] ?></td>
+                <th style="text-align:left">Nombre: </th><td><?= $userInfo[0]['NOMBRE'] ?></td>
+                <th style="text-align:left">Apellido: </th><td colspan="2"><?= $userInfo[0]['APELLIDO'] ?></td>
                 
               </tr>
               <tr>
-                <th>Direccion: </th><td><?= $userInfo[0]['NOMBRE DE LA CALLE'] ?></td>
-                <th>Numero: </th><td ><?= $userInfo[0]['NUMERO DE LA CASA'] ?></td> 
-                <th>Barrio: </th><td><?= $barrio ?></td>
+                <th style="text-align:left">Direccion: </th><td><?= $userInfo[0]['NOMBRE DE LA CALLE'] ?></td>
+                <th style="text-align:left">Numero: </th><td ><?= $userInfo[0]['NUMERO DE LA CASA'] ?></td> 
+                <th style="text-align:left">Barrio: </th><td><?= $barrio ?></td>
                 
               </tr>
               <tr>
-                <th>Ciudad: </th><td><?= $ciudad ?></td>
-                <th>Localidad: </th><td ><?= $localidad ?></td>
-                <th>Perfil: </th><td><?= strtoupper($user['data']['perfil_de_usuario']) ?></td>
+                <th style="text-align:left">Ciudad: </th><td><?= $ciudad ?></td>
+                <th style="text-align:left">Localidad: </th><td ><?= $localidad ?></td>
+                <th style="text-align:left">Perfil: </th><td><?= strtoupper($user['data']['perfil_de_usuario']) ?></td>
                 
               </tr>
               <tr>
-                  <th>Celular 1: </th><td ><?= $userInfo[0]['CELULAR 1'] ?></td>
-                  <th>Celular 2: </th><td ><?= $userInfo[0]['CELULAR 2'] ?></td>
-                  <th>Linea Baja 1: </th><td><?= $userInfo[0]['TELEFONO 1'] ?></td>
+                  <th style="text-align:left">Celular 1: </th><td ><?= $userInfo[0]['CELULAR 1'] ?></td>
+                  <th style="text-align:left">Celular 2: </th><td ><?= $userInfo[0]['CELULAR 2'] ?></td>
+                  <th style="text-align:left">Linea Baja 1: </th><td><?= $userInfo[0]['TELEFONO 1'] ?></td>
                   
               </tr>
               
               <tr>
-                  <th>Linea Baja 2: </th><td><?= $userInfo[0]['TELEFONO 2'] ?></td>
-                  <th>Email: </th><td colspan="3"><?= $userInfo[0]['CORREO ELECTRONICOWEB'] ?></td>
+                  <th style="text-align:left">Linea Baja 2: </th><td><?= $userInfo[0]['TELEFONO 2'] ?></td>
+                  <th style="text-align:left">Email: </th><td colspan="3"><?= $userInfo[0]['CORREO ELECTRONICOWEB'] ?></td>
                   
               </tr>
              

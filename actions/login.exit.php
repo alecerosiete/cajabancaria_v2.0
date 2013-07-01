@@ -1,9 +1,9 @@
 <?php
 include '../inc/session.inc';
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once '../inc/conexion-functions.php';
+include '../inc/sql-functions.php';
+//guarda los datos para auditoria
+addUserAuditInfo("logout");
 redirect(ROOT_PATH."/login.php");
 
 ?>
