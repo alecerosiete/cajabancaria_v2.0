@@ -254,18 +254,18 @@ $role = getRole(ROLE_PENSIONADO);
                         
                         <form action="./actions/save-banner-action.php" method="POST" id="form-upload-banner" enctype="multipart/form-data">
                             <div class="text-novedades-preview">
-                                <label>Titulo para el banner</label><input type="text" id="titulo-banner" style="width:300px" placeholder="Ingrese un titulo">
-                                <label>Descripcion para el banner</label><textarea id="texto-banner" style="width:300px" rows="8"></textarea>
+                                <label>Titulo para el banner</label><input type="text" id="titulo-banner" name="titulo-banner" style="width:300px" placeholder="Ingrese un titulo">
+                                <label>Descripcion para el banner</label><textarea id="texto-banner" name="texto-banner" style="width:300px" rows="8"></textarea>
                                  <div>
 
-                                    <input type="submit" class="btn"  id="btn-guardar-banner" value="Guardar">
+                                    <input type="submit" class="btn" id="btn-guardar-banner" value="Guardar">
                                     <div style="clear: both"></div>
                                 </div>
                             </div>
 
                             <div class="banner-preview">
                                 <div class="fileupload fileupload-new" data-provides="fileupload" id="box-banner">
-                                     <div id="banner-thumbnail"class="fileupload-preview thumbnail" style="width: 350px; height: 190px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
+                                     <div id="banner-thumbnail" class="fileupload-preview thumbnail" style="width: 350px; height: 190px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
                                      <div>
                                        <span class="btn btn-file">
                                            <span class="fileupload-new"  >Seleccione un banner</span>

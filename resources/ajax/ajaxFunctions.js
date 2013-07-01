@@ -63,7 +63,9 @@ $(document).ready(function(){
         }else if(texto.length == 0){
             alert("Especifique un texto");
             return false;
-        }else{
+        }
+        /*Envio por ajax deshabilitado--
+        else{
             //uploadFile('banner','archivo');        
             
             $.ajax({
@@ -79,6 +81,7 @@ $(document).ready(function(){
            
            
         }
+        -- Fin de envio por ajax*/
         
        
     });
