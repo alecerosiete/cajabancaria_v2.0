@@ -5,6 +5,10 @@ require '../inc/conexion-functions.php';
 require '../inc/sql-functions.php';
 
 $ci = $_POST['ci'];
+
+addEventAudit($ci, $_SERVER['REQUEST_URI'],"Menu Usuarios - Guardo nuevo PIN generado");
+    
+    
 $pin = $_POST['pin'];
 $db = conect();
 $sql = "UPDATE sys_user SET password = '$pin' WHERE ci = '$ci'";

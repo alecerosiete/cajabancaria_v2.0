@@ -6,9 +6,11 @@ $user = getUser();
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
 
-
+/* Guarda informacion de auditoria */
+addEventAudit($user['CI'],$_SERVER['REQUEST_URI'],"Ingreso a la pagina principal");
 
 $db = conect();
+
 $tipo_usuario = $user['data']['tipo_de_usuario'];
 
 $userInfo = getUserInfo();

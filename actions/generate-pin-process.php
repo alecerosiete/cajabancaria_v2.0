@@ -1,7 +1,7 @@
 <?php
     require '../inc/sql-functions.php';
     //sleep(2);
-    
+
     $long = $_POST['longitud'];
     $caracteres='0123456789';
     $longpalabra=$long;

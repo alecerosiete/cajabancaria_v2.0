@@ -3,7 +3,7 @@ require '../inc/session.inc';
 assertUser();
 require '../inc/conexion-functions.php';
 require '../inc/sql-functions.php';
-
+$user = getUser();
 $titulo = $_POST["titulo"];
 $texto = $_POST["texto"];
 $nombre_imagen = string2url($_POST["nombre_imagen"]);
@@ -16,5 +16,5 @@ $nombre_imagen = string2url($_POST["nombre_imagen"]);
     //print_r($rowInfo);
     $db = null;
     setSuccess("Los datos se guardaron con exito!");
-    
+    addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Banner - Guardo informacion de nuevo banner");
 ?>

@@ -4,6 +4,7 @@ assertUser();
 $user = getUser();
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Jubilados");
 $db = conect();
 $jubilaciones = getJubilados($user['CI']);
 ?>

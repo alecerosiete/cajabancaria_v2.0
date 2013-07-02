@@ -24,4 +24,5 @@ if($item['password'] == $pin) {
     addError("Su Pin actual es incorrecto, intentelo de nuevo.");
     echo 0;
 }
+addEventAudit($ci, $_SERVER['REQUEST_URI'],"Menu Usuarios - Proceso de Actualizacion de PIN");
 $db = null;

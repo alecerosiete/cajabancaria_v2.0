@@ -5,7 +5,7 @@ $user = getUser();
 //print_r($user);
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
-
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Banner - Administracion de novedades");
 
 $role = getRole(ROLE_PENSIONADO);
 

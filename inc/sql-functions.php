@@ -367,8 +367,28 @@ function getClientIP(){
 }
 
 
-function addEventAuditInfo(){
+function addEventAudit($user_id,$event_site,$description){
     /* Agrega todas las actividades del usuario mientras se mantiene en sesion */
-    
-    
+    $db = conect();
+    $sql = "INSERT INTO `audit_event`(`user_id`, `event_site`, `description`, `event_time`) VALUES (:user_id,:event_site,:description,now())";
+    $statement = $db->prepare($sql);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->bindValue(':event_site', $event_site);
+    $statement->bindValue(':description', $description);
+    $statement->execute();
+    error_log($sql);
+    $db = null;
+    addUserAuditInfo("logout");
+}
+
+function getEventosAuditoria($user_id){
+    $db = conect();
+    $sql = "SELECT id,user_id,event_site,description,DATE_FORMAT(event_time,'%d/%m/%Y %H:%i:%s') as time FROM audit_event WHERE user_id = :user_id";
+    $statement = $db->prepare($sql);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->execute();
+    $eventos = $statement->fetchAll();
+    //print_r($rowInfo);
+    $db = null;
+    return $eventos;
 }

@@ -5,6 +5,7 @@ assertUser();
 $user = getUser();
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Contactos");
 $db = conect();
 
 

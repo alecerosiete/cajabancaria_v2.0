@@ -4,9 +4,11 @@ assertUser();
 require '../inc/conexion-functions.php';
 require '../inc/sql-functions.php';
 
+
 $db = conect();
 
 $ci = $_POST['ci'];
+addEventAudit($ci, $_SERVER['REQUEST_URI'],"Menu Buscar - Consulto informacion de usuario");
 
 $perfil = consultaPerfil($ci);
 

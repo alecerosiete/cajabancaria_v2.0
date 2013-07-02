@@ -5,6 +5,7 @@ assertUser();
 $user = getUser();
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Reservaciones");
 $db = conect();
 //$prestamos = getReservas($user['CI']);
 
@@ -67,14 +68,14 @@ $db = conect();
                              <tr>
                                  <td>
                                      <div id="startDate" class="input-append date">
-                                        <input type="text" id="startDateConsulta" value="<?= date('Y-m-d')." 00:00:00"?>"></input>
+                                        <input type="text" id="startDateConsulta" value="<?= date('d-m-Y')." 00:00:00"?>"></input>
                                         <span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                         </span>
                                       </div>
                                  </td>
                                   <td><div id="endDate" class="input-append date">
-                                        <input type="text" id="endDateConsulta" value="<?= date('Y-m-d H:m:s')?>"></input>
+                                        <input type="text" id="endDateConsulta" value="<?= date('d-m-Y H:m:s')?>"></input>
                                         <span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                         </span>
@@ -129,11 +130,11 @@ $db = conect();
                             <script type="text/javascript">
 
                               $('#startDate').datetimepicker({
-                                format: 'yyyy-MM-dd hh:mm:ss',
+                                format: 'dd-MM-yyyy hh:mm:ss',
                                 language: 'pt-BR'
                               });
                               $('#endDate').datetimepicker({
-                                format: 'yyyy-MM-dd hh:mm:ss',
+                                format: 'dd-MM-yyyy hh:mm:ss',
                                 language: 'pt-BR'
                               });
 

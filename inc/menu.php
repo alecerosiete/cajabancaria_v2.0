@@ -52,6 +52,9 @@
                             <li><a href="#">Inmuebles</a></li>
                         </ul>
                     </li>
+                    <?php if(getPerfil(ROLE_AUDITOR)){?>
+                     <li><a href='./auditoria.php'>Auditoria</a></li>
+                    <?php } ?>
                     <li><a href='./contacto.php'>Contacto</a></li>
                     
                 </ul>

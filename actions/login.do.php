@@ -48,6 +48,9 @@ if( !empty($ci) && !empty($pin) ) {
         setUser($item['ci'], $item);
         //guarda los datos para auditoria
         addUserAuditInfo("login");
+        addEventAudit($ci, $_SERVER['REQUEST_URI'], "Acceso exitoso al sistema");
+        //misma hora para desconexion
+        addUserAuditInfo("logout");
         $db = null;
         redirect(ROOT_PATH."/index.php");
       } else {

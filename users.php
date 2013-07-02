@@ -1,10 +1,14 @@
 <?php
 
 require './inc/session.inc';
+require './inc/conexion-functions.php';
+require './inc/sql-functions.php';
 assertUser();
 $user = getUser();
-//require './inc/conexion-functions.php';
-//require './inc/sql-functions.php';
+
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Usuarios - Actualizacion de usuarios");
+
+
 //$db = conect();
 
 ?>

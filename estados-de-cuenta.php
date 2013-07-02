@@ -5,6 +5,7 @@ assertUser();
 $user = getUser();
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Estado de cuenta");
 $db = conect();
 $prestamos = getPrestamos($user['CI']);
 $tarjetas = getTarjetas($user['CI']);

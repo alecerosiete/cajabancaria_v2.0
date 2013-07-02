@@ -12,6 +12,7 @@ define('ROLE_AFILIADO', 'Activo');
 define('ROLE_DIRECTIVO', 'Directivo');
 define('ROLE_JUBILADO', 'Jubilado');
 define('ROLE_PENSIONADO', 'Pensionado');
+define('ROLE_AUDITOR', 'Auditor');
 
 define('S_USER', 'user');
 define('S_ERROR_LIST', 'errors');
@@ -224,6 +225,8 @@ function formatoFechaDDMMAAAA($fecha)
     }
     return substr($fecha, 0,2)."-".substr($fecha, 2, 2)."-".substr($fecha, 4, 4);
 }
+
+
 
 function getAccesDenied()
 {

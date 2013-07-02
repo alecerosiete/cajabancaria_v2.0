@@ -4,9 +4,12 @@ assertUser();
 require '../inc/conexion-functions.php';
 require '../inc/sql-functions.php';
 
+
 $db = conect();
 
 $ci = $_POST['ci'];
+addEventAudit($ci, $_SERVER['REQUEST_URI'],"Menu Usuarios - Buscar usuario");
+
 $perfil = consultaPerfil($ci);
 
 if(empty($perfil)){
@@ -96,7 +99,7 @@ $perfil = consultaPerfil($ci);
                           
                          <select name="perfil_de_usuario" id="perfil_de_usuario">
                           <?php
-                            $perfiles = array("Activo","Directivo","Administrador");
+                            $perfiles = array("Activo","Directivo","Administrador","Auditor");
                             $selected = "";
                             foreach ($perfiles as $p){
                                 if($p == $perfil['perfil_de_usuario']){

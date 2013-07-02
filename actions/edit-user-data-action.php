@@ -1,11 +1,14 @@
 <?php
 require_once '../inc/session.inc';
 require_once '../inc/conexion-functions.php';
+require '../inc/sql-functions.php';
 $db = conect();
 $user = getUser();
 //$ci = $user['data']['CEDULA DE IDENTIDAD'];
 //$pin = $user['data']['PINWEB'];
 $ci = $_POST['ci'];
+addEventAudit($ci, $_SERVER['REQUEST_URI'],"Menu Principal - Edito datos personales");
+
 $numeroDeCasa = $_POST['numeroDeCasa'];
 $barrio = $_POST['barrio'];
 $ciudad = $_POST['ciudad'];

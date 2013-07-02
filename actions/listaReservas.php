@@ -1,10 +1,29 @@
 <?php
 include '../inc/session.inc';
 include '../inc/conexion-functions.php';
+require '../inc/sql-functions.php';
 $db = conect();
+$user = getUser();
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Reservas - Consulto Reservaciones de local");
 
 $start = $_POST['start'];
 $end = $_POST['end'];
+/*
+$fechaHora_i = explode(" ",$start);
+$fecha_i = formatoFechaDDMMAAAA($fechaHora_i[0]);
+$hora_i = formatoHoraHHMMSS($fechaHora_i[1]);
+
+$fecha_f = formatoFechaDDMMAAAA($fecha);
+$hora_f = explode(":", $fechaHora[1]);
+
+$fecha=explode("-","04-05-2011");// convertimos el string a un array
+$fecha=array_reverse($fecha);// invertimos cada elemento del array
+$fecha=implode("-",$fecha);// volvemos a convertirlo en string separado por "-"
+echo $fecha;// probamos su funcionamiento
+*/
+
+
+
 $tipo = $_POST['tipo'];
 $rows = $_POST['rows'];
 
@@ -23,10 +42,10 @@ $rows = $_POST['rows'];
             </thead>
             <tbody>";
     
-      
+       //STR_TO_DATE('$start', '%d-%m-%Y %H:%i:%s') AND STR_TO_DATE('$end', '%d-%m-%Y %H:%i:%s')
             $query = "";
             /*-- OBTIENE LOS REGISTROS --*/
-            $query = "SELECT *,DESCRIPCION FROM aqw018web alq INNER JOIN aqpartloc local ON alq.`TIPO DE LOCAL` = local.`TIPO DE LOCAL` WHERE (`HORA-MINUTO INICIO EVENTO` > DATE_FORMAT('$start', '%T') AND `HORA-MINUTO FIN EVENTO` < DATE_FORMAT('$end', '%T')) AND `FECHA RESERVA` BETWEEN DATE('$start') AND DATE('$end')";
+            $query = "SELECT *,DESCRIPCION FROM aqw018web alq INNER JOIN aqpartloc local ON alq.`TIPO DE LOCAL` = local.`TIPO DE LOCAL` WHERE (`FECHA RESERVA` BETWEEN STR_TO_DATE('$start', '%d-%m-%Y %H:%i:%s') AND STR_TO_DATE('$end', '%d-%m-%Y %H:%i:%s'))";
             if($tipo != ""){
                 $query .= " AND alq.`TIPO DE LOCAL` = '$tipo'";
             }

@@ -3,7 +3,7 @@ require '../inc/session.inc';
 assertUser();
 require '../inc/conexion-functions.php';
 require '../inc/sql-functions.php';
-
+$user = getUser();
 $uploaddir = '../resources/images/banner/'; 
 //exec("rm ../audio/introduction.*");
 $file = $uploaddir.string2url(basename($_FILES['banner']['name'])); 
@@ -27,7 +27,7 @@ $nombre_imagen = string2url(basename($_FILES['banner']['name']));
 /* Fin */
     
 setSuccess("Nuevo banner guardado con exito");
-
+addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Banner - Guardo nueva imagen para banner");
 //exec("chmod 777 ../audio/*");
 $url = "../banner-admin.php";
 //redirect($url);
