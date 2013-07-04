@@ -68,21 +68,23 @@ $db = conect();
                              <tr>
                                  <td>
                                      <div id="startDate" class="input-append date">
-                                        <input type="text" id="startDateConsulta" value="<?= date('d-m-Y')." 00:00:00"?>"></input>
+                                         
+                                        <input  class="add-on" type="text" id="startDateConsulta" value="<?= date('d-m-Y')." 00:00:00"?>"></input>
+                                         
                                         <span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                         </span>
                                       </div>
                                  </td>
                                   <td><div id="endDate" class="input-append date">
-                                        <input type="text" id="endDateConsulta" value="<?= date('d-m-Y H:m:s')?>"></input>
+                                        <input class="add-on" type="text" id="endDateConsulta" value="<?= date('d-m-Y')." 23:59:59"?>"></input>
                                         <span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                         </span>
                                       </div>
                                   </td>
                                    <td>
-                                      <input type="text" id="user_id_filter" name="user_id_filter" placeholder="C.I.">
+                                      <input class="add-on" type="text" id="user_id_filter" name="user_id_filter" placeholder="C.I.">
                                   </td>                                           
                                   <td>
                                     <select style="width:80px" name="cantidadRegistros" id="cantidadRegistros"> 

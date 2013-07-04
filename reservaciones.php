@@ -75,7 +75,7 @@ $db = conect();
                                       </div>
                                  </td>
                                   <td><div id="endDate" class="input-append date">
-                                        <input type="text" id="endDateConsulta" value="<?= date('d-m-Y H:m:s')?>"></input>
+                                        <input type="text" id="endDateConsulta" value="<?= date('d-m-Y')." 23:59:59"?>"></input>
                                         <span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                                         </span>

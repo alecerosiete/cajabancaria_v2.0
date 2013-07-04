@@ -49,7 +49,7 @@ $tarjetas = getTarjetas($user['CI']);
           </div>
 
         <div class="hero-unit">
-             <?php include ('./inc/userInfo.php');?>
+             
         <H3 style="text-align:right;color:#E35300;margin-bottom:50px">Tarjetas de Cr&eacute;dito</H3>
         <hr style="border: 1px solid #E35300">
         <?php if (count($tarjetas)):?>
@@ -98,14 +98,14 @@ $tarjetas = getTarjetas($user['CI']);
                 <?php $deuda = $tc['SALDO FINANCIADO'] + $tc['SALDO FACT. NO VENCIDO'] + $tc['SALDO A FACTURAR'] + $tc['IMPORTE AUTORIZ. PENDIENT'];?>
                 <tbody>
                 <tr>
-                    <td ><?=number_format($tc['SALDO FINANCIADO'],0,',','.')?></td>
-                    <td ><?=number_format($tc['SALDO FACT. NO VENCIDO'],0,',','.')?></td>
-                    <td ><?=number_format($tc['SALDO A FACTURAR'],0,',','.')?></td>
-                    <td ><?=number_format($tc['SALDO EN MORA'],0,',','.')?></td>
-                    <td ><?=number_format($tc['IMPORTE AUTORIZ. PENDIENT'],0,',','.')?></td>
-                    <td ><?=number_format($deuda,0,',','.')?></td>
-                    <td ><?=number_format($tc['PAGO MINIMO'],0,',','.')?></td>
-                    <td ><?=$tc['DIAS EN MORA']?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO FINANCIADO'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO FACT. NO VENCIDO'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO A FACTURAR'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO EN MORA'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['IMPORTE AUTORIZ. PENDIENT'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($deuda,0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['PAGO MINIMO'],0,',','.')?></td>
+                    <td style="text-align:right"><?=$tc['DIAS EN MORA']?></td>
               
                     <td ><?=formatoFechaDDMMAAAA($tc['FECHA VENCIM. EXTRACTO'])?></td>
                 </tr>

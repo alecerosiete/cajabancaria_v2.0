@@ -51,34 +51,73 @@ $aportes = getAportes($user['CI']);
       <table class="table table-bordered" style="font-size: 12px;background:#f5f5f5">
             <thead>
             <tr>
-                <th align="right">Padron</th>
-                <th align="right">Nº de Documento</th>
-                <th align="center">Años Trabajados</th>
-                <th align="center">Meses Trabajados</th>
-                <th align="center">Dias Trabajados</th>
-                <th align="right">TOTAL APORTADO</th>
+                
+                <th style="text-align:center">Años Trabajados</th>
+                <th style="text-align:center">Meses Trabajados</th>
+                <th style="text-align:center">Dias Trabajados</th>
+                <th style="text-align:right">TOTAL APORTADO</th>
             </tr>
             </thead>
             <tbody>
-            <?php $totalaportado = 0;?>
+            
             <?php foreach ($aportes as $a):?>
             <tr>
-                <td ><?=$a['PADRON']?></td>
-                <td ><?=number_format($a['CEDULA DE IDENTIDAD'],0,'','.')?></td>
-                <td ><?=$a['ANOS TRABAJADOS']?></td>
-                <td ><?=$a['MESES TRABAJADOS']?></td>
-                <td ><?=$a['DIAS TRABAJADOS']?></td>
-                <td ><?=number_format($a['TOTAL APORTADO'],0,'','.')?></td>
+                
+                <td style="text-align:center"><?=$a['ANOS TRABAJADOS']?></td>
+                <td style="text-align:center"><?=$a['MESES TRABAJADOS']?></td>
+                <td style="text-align:center"><?=$a['DIAS TRABAJADOS']?></td>
+                <td style="text-align:right"><?=number_format($a['TOTAL APORTADO'],0,'','.')?></td>
             </tr>
-                <?php $totalaportado+=$a['TOTAL APORTADO'];?>
+                
             <?php endforeach;?>
             </tbody>
-            <tfoot>
-                <td class="total" colspan="5"><div style="text-align: left;">TOTALES</div></td>
-                <td class="total"><div><?=number_format($totalaportado,0,'','.')?></div></td>
-            </tfoot>
+            
         </table>
-       
+            
+        <br>
+        <H4 style="text-align:right;color:#E35300;margin-bottom:25px">Detalle ultimos 3 meses</H4>
+        <hr style="border: 1px solid #E35300">
+        <!-- Get Datos de los ultimos 3 meses -->
+        <?php $aportes3ultimosMeses = getAportes3ultimosMeses($user['CI']);?>
+        <table class="table table-bordered" style="font-size: 12px;background:#f5f5f5">
+            <thead>
+            <tr>
+
+                <th style="text-align:center">Mes/Año</th>
+                <th style="text-align:right">Aporte</th>
+                <th style="text-align:right">Otros Aportes</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+
+            <?php $a = $aportes3ultimosMeses?>
+            <tr>
+
+                <td style="text-align:center"><?=  formatoFechaMMAAAA($a[0][4])?></td>
+                <td style="text-align:right"><?=  number_format($a[0][5])?></td>
+                <td style="text-align:right"><?= number_format($a[0][6])?></td>
+                
+            </tr>
+            <tr>
+
+                <td style="text-align:center"><?=formatoFechaMMAAAA($a[0][7])?></td>
+                <td style="text-align:right"><?=number_format($a[0][8])?></td>
+                <td style="text-align:right"><?=number_format($a[0][9])?></td>
+                
+            </tr>
+            <tr>
+
+                <td style="text-align:center"><?=formatoFechaMMAAAA($a[0][10])?></td>
+                <td style="text-align:right"><?=number_format($a[0][11])?></td>
+                <td style="text-align:right"><?=number_format($a[0][12])?></td>
+                
+            </tr>
+            
+            </tbody>
+
+        </table>
+            
         <?php else:?>
             <div class='alert alert-warning'>No existen aportes para mostrar</div>
         <?php endif;?>

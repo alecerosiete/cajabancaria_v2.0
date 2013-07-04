@@ -36,14 +36,14 @@
 		if (this.isInput) {
 			this.element.on({
 				focus: $.proxy(this.show, this),
-				//blur: $.proxy(this.hide, this),
+				blur: $.proxy(this.hide, this),
 				keyup: $.proxy(this.update, this)
 			});
 		} else {
 			if (this.component){
 				this.component.on('click', $.proxy(this.show, this));
 			} else {
-				this.element.on('click', $.proxy(this.show, this));
+				this.element.on('click', $.proxy(this.hide, this));
 			}
 		}
 	

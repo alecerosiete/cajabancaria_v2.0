@@ -22,7 +22,7 @@ define('S_SUCCESS', 'success_msg');
 define('ROOT_PATH', '/portal2');
 
 function hasUser() {
-    return isset($_SESSION[S_USER]);
+    return isset($_SESSION[S_USER]) ;
 }
 
 function getUser() {
@@ -200,7 +200,10 @@ function xhtmlOptions($list, $selected) {
 
 function formatoFecha($fecha)
 {
-    return substr($fecha, 0,4)."-".substr($fecha, 4, 2)."-".substr($fecha, 6, 2);
+    $yyyy = substr($fecha, 0,4);
+    $mm = substr($fecha, 4, 2);
+    $dd = substr($fecha, 6, 2);
+    return $dd."/".$mm."/".$yyyy;
 }
 
 function formatoFechaMMAA($fecha)
@@ -212,6 +215,14 @@ function formatoFechaMMAA($fecha)
     }
 }
 
+function formatoFechaMMAAAA($fecha)
+{
+    if(strlen($fecha) == 6){
+        return substr($fecha, 0, 2)."/".substr($fecha, 2, 4);
+    }else{
+        return "0".substr($fecha, 0, 1)."/".substr($fecha, 1, 4);
+    }
+}
 
 function formatoDeTarjeta($tc)
 {

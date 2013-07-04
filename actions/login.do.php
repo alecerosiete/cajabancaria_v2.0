@@ -17,7 +17,9 @@ if ($securimage->check($_POST['captcha_code']) == false) {
 $db = conect();
 $ci = $_POST['ci'];
 $pin = $_POST['pin'];
-if( !empty($ci) && !empty($pin) ) {
+$accept = $_POST['accept-term'];
+error_log("ACEPTO: ".$accept);
+if( !empty($ci) && !empty($pin) && !empty($accept)) {
     /*Preparamos la sentencia*/
     //$statement = $db->prepare("SELECT pw.*, pb.NOMBRE AS NOMBREBANCO FROM pddirweb pw INNER JOIN prparban pb ON pw.BANCO = pb.BANC AND `CEDULA DE IDENTIDAD` = ? AND PINWEB = ?");
       
@@ -43,7 +45,7 @@ if( !empty($ci) && !empty($pin) ) {
     $statement->execute(array($ci,$pin));
 
     if( $item = $statement->fetch(PDO::FETCH_ASSOC) ) {
-        setSuccess("Ha ingresado Correctamente!");
+        
         //guarda los datos en sesion
         setUser($item['ci'], $item);
         //guarda los datos para auditoria
@@ -52,7 +54,13 @@ if( !empty($ci) && !empty($pin) ) {
         //misma hora para desconexion
         addUserAuditInfo("logout");
         $db = null;
+        $user = getUser();
+        
+        setSuccess("Ha ingresado Correctamente!");
         redirect(ROOT_PATH."/index.php");
+        
+        
+       
       } else {
           //error_log($statement);  
         addError("Debe ingresar un usuario existente, activo y con contrase&ntilde;a vigente ");
@@ -61,7 +69,12 @@ if( !empty($ci) && !empty($pin) ) {
       }
 
 } else {
+  if(empty($accept)){
+      addError("Debe aceptar los terminos y condiciones");
+  }else{
   addError("Debe ingresar un nombre de usuario y su contrase&ntilde;a");
   $db = null;
+  
+  }
   redirect(ROOT_PATH."/login.php");
 }

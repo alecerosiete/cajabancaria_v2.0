@@ -2,27 +2,24 @@
 require './inc/session.inc';
 assertUser();
 $user = getUser();
-
 require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
 
 /* Guarda informacion de auditoria */
 addEventAudit($user['CI'],$_SERVER['REQUEST_URI'],"Ingreso a la pagina principal");
-
 $db = conect();
-
 $tipo_usuario = $user['data']['tipo_de_usuario'];
-
 $userInfo = getUserInfo();
-
 $ciudad = getCiudad($userInfo[0]['CIUDAD']);
-
 $localidad = getLocalidad($userInfo[0]['LOCALIDAD']);
-
 $barrio = getBarrio($userInfo[0]['BARRIO']);
-
 $role = getRole(ROLE_PENSIONADO);
-
+$mensajes = getMensajesPersonalizados($user['CI']);
+$mensajesLeidos = getMensajesLeidos($user['CI']);
+$mensaje = $mensajesLeidos;
+if($mensaje > 0 ){
+    setSuccess("Tenes   <div class='label label-info' style='font-size:18px;'>".$mensaje."</div> Mensaje".($mensaje==1 ? "" : "s")."</a> por leer");
+}
 //print_r($role);
 ?>
 <!DOCTYPE html>
@@ -114,7 +111,7 @@ $role = getRole(ROLE_PENSIONADO);
     <div class="container">
       <div class="header-caja-bancaria">
           <div class="btn-logout">
-            Conectado como: <?=$user['data']['nombre']?> <a href="./actions/login.exit.php" class="btn btn-warning">Salir</a>
+              Conectado como: <?=$user['data']['nombre'] ?> <a class="btn" href="<?=$mensaje == 0 ? "#" : "#popUpMensaje"?>" id="idPopUpMensaje" data-toggle="modal"> Tiene: <div class="label label-info" style="font-size:18px;"><?=$mensaje?></div> Mensaje<?=$mensaje==1 ? "" : "s"?>.</a>   <a href="./actions/login.exit.php" class="btn btn-warning">Salir</a>
           </div>
           <div class="alert-msg-show">
             <?php include("./tmpl/success_panel.inc")?>
@@ -374,7 +371,7 @@ $role = getRole(ROLE_PENSIONADO);
       <hr>
          <footer>
         <div class="footer">
-             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2012 - Todos los Derechos Reservados
+             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2012 - Todos los Derechos Reservados - <a href="./terminos-y-condiciones.php">Terminos y Condiciones</a> -
      www.cajabancaria.gov.py <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
         </div> 
 
@@ -385,6 +382,48 @@ $role = getRole(ROLE_PENSIONADO);
     
     
     <input type="hidden" id="ci" value="<?= $userInfo[0]['CEDULA DE IDENTIDAD'] ?>">
+    
+    <!-- MENSAJES -->
+    <div id="popUpMensaje" class="modal hide fade in" style="display: none;">
+           <div class="modal-header">
+              <a data-dismiss="modal" class="close">×</a>
+              <h3 style='display:inline'>Mensaje de la Caja Bancaria</h3>
+           </div>
+           <div class="modal-body" style="max-height: 250px">
+               <div>
+                  
+                  <?php if(count($mensajes)):?>
+                     
+                        <?php foreach ($mensajes as $key => $value) { ?>
+                   <table class="table table-bordered">
+                       <tr style="background: #ff9933">
+                            <td style="text-align:left"><strong>Fecha:</strong> <?=formatoFechaDDMMAAAA($mensajes[$key][3])?> <?=substr($mensajes[$key][4],0,2).":".substr($mensajes[$key][4],2,2)?></td>
+                            
+                        </tr>
+                        <tr style="background: #fff">
+                            <td style="text-align:leftr"><strong>Mensaje: </strong></td>
+                        </tr>
+                        <tr style="background: #fff">
+                            <td>
+                       
+                                <?=$mensajes[$key][5]?>
+                        
+                            </td>
+                        </tr>
+                    </table>
+                        <?php }?>
+                   
+                   <?php else:?>
+                        <div class='alert alert-warning'>No existen ningun mensaje</div>
+                  <?php endif;?>     
+               </div>
+            </div>
+            <div class="modal-footer" style="position:static">
+             <a href="#" id="btn-modal-mensaje-close" data-dismiss="modal" class="btn">Cerrar</a>
+            </div>
+        </div>
+    <!-- Fin MEnsajes -->
+    
     
     <!-- Modal Modificar pin -->
        

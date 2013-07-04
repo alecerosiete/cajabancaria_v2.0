@@ -253,7 +253,7 @@ function activateUserState($ci){
     $active = $statement->fetch(PDO::FETCH_ASSOC);
     error_log("ESTADO ACTIVE:".$active['active']);
     $sql = "UPDATE sys_user SET active = ";
-    $sql .= $active['active'] == 1 ? 0 : 1;
+    $sql .= $active['active'] > 0 ? 0 : 1;
     $sql .= " WHERE ci = '$ci'";
     $statement = $db->prepare($sql);
     $statement->execute();
@@ -383,7 +383,7 @@ function addEventAudit($user_id,$event_site,$description){
 
 function getEventosAuditoria($user_id){
     $db = conect();
-    $sql = "SELECT id,user_id,event_site,description,DATE_FORMAT(event_time,'%d/%m/%Y %H:%i:%s') as time FROM audit_event WHERE user_id = :user_id";
+        $sql = "SELECT id,user_id,event_site,description,DATE_FORMAT(event_time,'%d/%m/%Y %H:%i:%s') as time FROM audit_event WHERE user_id = :user_id";
     $statement = $db->prepare($sql);
     $statement->bindValue(':user_id', $user_id);
     $statement->execute();
@@ -391,4 +391,43 @@ function getEventosAuditoria($user_id){
     //print_r($rowInfo);
     $db = null;
     return $eventos;
+}
+
+function getAportes3ultimosMeses($ci){
+    $db = conect();
+
+    $sql = "SELECT * FROM  `apw120web` WHERE  `CEDULA DE IDENTIDAD` = :ci";
+    $statement = $db->prepare($sql);
+    $statement->bindValue(':ci', $ci);
+    $statement->execute();
+    $ultimosAportes = $statement->fetchAll();
+    //print_r($rowInfo);
+    $db = null;
+    return $ultimosAportes;
+}
+
+function getMensajesPersonalizados($ci){
+    $db = conect();
+
+    $sql = "SELECT * FROM `mensajeweb` WHERE  `CEDULA DE IDENTIDAD` = :ci AND ESTADO = 0  ORDER BY `HORA MENSAJE` DESC";
+    $statement = $db->prepare($sql);
+    $statement->bindValue(':ci', $ci);
+    $statement->execute();
+    $mensajes = $statement->fetchAll();
+    //print_r($rowInfo);
+    $db = null;
+    return $mensajes;
+}
+
+function getMensajesLeidos($ci){
+    $db = conect();
+
+    $sql = "SELECT count(*) CANT FROM `mensajeweb` WHERE  `CEDULA DE IDENTIDAD` = :ci AND ESTADO = 0";
+    $statement = $db->prepare($sql);
+    $statement->bindValue(':ci', $ci);
+    $statement->execute();
+    $mensajes = $statement->fetch(PDO::FETCH_ASSOC);
+    //print_r($rowInfo);
+    $db = null;
+    return $mensajes['CANT'];
 }

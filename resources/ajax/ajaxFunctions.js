@@ -28,7 +28,22 @@ $(document).ready(function(){
     });
     
        
-    
+    /* Mensajes */
+    $("#idPopUpMensaje").click(function(){
+        
+        $.ajax({
+           type: "POST",
+           url: "./actions/update-sms-leidos.php"
+           
+        }).done(function() {
+               
+            $("#btn-modal-mensaje-close").click(function (){
+                 window.location = "./index.php";
+            });
+        })     
+               
+    });
+    /* Fin mensajes */
     
     
     /* PDDIRWEB DATA CHARGING */
@@ -395,6 +410,11 @@ $(document).ready(function(){
         
         /* fin de la funcion */
  
+        $("#btn-accept-terms").click(function(){
+            var ci = $("#id-accept-terms").val();
+            update_accept_terms(ci);
+        });
+        
         
 });
 function auto_logout(){
@@ -472,3 +492,21 @@ function verifyChangePin(){
 	
 }
 
+function update_accept_terms(ci){
+        
+
+	$.ajax({
+           type: "POST",
+           url: "./actions/update-accept-state.php",
+           data: {
+               ci:ci,
+
+           }
+           }).done(function(resp) {
+                url = "./index.php";
+                window.location = url;
+               
+           });
+	
+	
+}

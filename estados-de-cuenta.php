@@ -59,35 +59,40 @@ $tarjetas = getTarjetas($user['CI']);
     </div>
     <H4>Prestamos</H4>
     <?php if(count($prestamos)):?>
+    <div style="float:right;display: inherit" class="btn btn-mini">
+        <i class="icon-download" ></i>
+
+    </div>
+    
         <table style="font-size:12px" class="table table-hover">
         <thead >
         <tr>
-            <th align="right">Nº</th>
-            <th>Tipo</th>
-            <th align="center">Fecha de Liquid.</th>
-            <th align="right">Plazo</th>
-            <th align="right">Interes</th>
-            <th align="right">Monto</th>
-            <th align="right">Cuota</th>
-            <th align="right">Fecha Pago</th>
-            <th align="right">Cuotas Pagadas</th>
-            <th align="right">Saldo</th>
+            <th style="text-align:left">Nº</th>
+            <th style="text-align:left">Tipo</th>
+            <th style="text-align:center">Fecha de Liquid.</th>
+            <th style="text-align:center">Plazo</th>
+            <th style="text-align:center">Interes</th>
+            <th style="text-align:center">Monto</th>
+            <th style="text-align:center">Cuota</th>
+            <th style="text-align:center">Fecha Pago</th>
+            <th style="text-align:center">Cuotas Pagadas</th>
+            <th style="text-align:center">Saldo</th>
         </tr>
         </thead>
         <tbody>
         <?php $monto = $cuota = $saldo = 0;?>
         <?php foreach ($prestamos as $p):?>
         <tr>
-            <td ><?=$p['NUMERO DE PRESTAMO']?></td>
-            <td ><?= getTipoDePrestamo($p['TIPO DE PRESTAMO']) != '' ? getTipoDePrestamo($p['TIPO DE PRESTAMO']): 'No definido';?></td>
-            <td ><?=formatoFecha($p['FECHA DE LIQUIDACION'])?></td>
-            <td ><?=$p['PLAZO']?></td>
-            <td ><?=$p['PORCENTAJE DE INTERES']?></td>
-            <td ><?=number_format($p['MONTO DEL PRESTAMO'],0,'','.')?></td>
-            <td ><?=number_format($p['IMPORTE DE CUOTA'],0,'','.')?></td>
-            <td ><?=formatoFecha($p['FECHA DE PAGO'])?></td>
-            <td ><?=number_format($p['CUOTAS PAGADAS'],0,'','.')?></td>
-            <td ><?=number_format($p['SALDO'],0,'','.')?></td>
+            <td style="text-align:left"><?=$p['NUMERO DE PRESTAMO']?></td>
+            <td style="text-align:left"><?= getTipoDePrestamo($p['TIPO DE PRESTAMO']) != '' ? getTipoDePrestamo($p['TIPO DE PRESTAMO']): 'No definido';?></td>
+            <td style="text-align:center"><?=formatoFecha($p['FECHA DE LIQUIDACION'])?></td>
+            <td style="text-align:right"><?=$p['PLAZO']?></td>
+            <td style="text-align:right"><?=$p['PORCENTAJE DE INTERES']?> %</td>
+            <td style="text-align:right"><?=number_format($p['MONTO DEL PRESTAMO'],0,'','.')?></td>
+            <td style="text-align:right"><?=number_format($p['IMPORTE DE CUOTA'],0,'','.')?></td>
+            <td style="text-align:center"><?=formatoFecha($p['FECHA DE PAGO'])?></td>
+            <td style="text-align:center"><?=number_format($p['CUOTAS PAGADAS'],0,'','.')?></td>
+            <td style="text-align:right"><?=number_format($p['SALDO'],0,'','.')?></td>
         </tr>
             <?php $monto+=$p['MONTO DEL PRESTAMO'];?>
             <?php $cuota+=$p['IMPORTE DE CUOTA'];?>
@@ -95,11 +100,11 @@ $tarjetas = getTarjetas($user['CI']);
         <?php endforeach;?>
         </tbody>
         <tfoot style="font-weight:bold">
-            <td class="total" colspan="5"><div style="text-align: left;">TOTALES</div></td>
-            <td class="total"><div><?=number_format($monto,0,'','.')?></div></td>
-            <td class="total"><div><?=number_format($cuota,0,'','.')?></div></td>
-            <td class="total" colspan="2"></td>
-            <td class="total"><div><?=number_format($saldo,0,'','.')?></div></td>
+            <td  colspan="5"><div style="text-align: left;">TOTALES</div></td>
+            <td style="text-align:right"><div><?=number_format($monto,0,'','.')?></div></td>
+            <td style="text-align:right"><div><?=number_format($cuota,0,'','.')?></div></td>
+            <td style="text-align:right" colspan="2"></td>
+            <td style="text-align:right"><div><?=number_format($saldo,0,'','.')?></div></td>
         </tfoot>
     </table>
       <?php else:?>
@@ -155,14 +160,14 @@ $tarjetas = getTarjetas($user['CI']);
                 <?php $deuda = $tc['SALDO FINANCIADO'] + $tc['SALDO FACT. NO VENCIDO'] + $tc['SALDO A FACTURAR'] + $tc['IMPORTE AUTORIZ. PENDIENT'];?>
                 <tbody>
                 <tr>
-                    <td ><?=number_format($tc['SALDO FINANCIADO'],0,',','.')?></td>
-                    <td ><?=number_format($tc['SALDO FACT. NO VENCIDO'],0,',','.')?></td>
-                    <td ><?=number_format($tc['SALDO A FACTURAR'],0,',','.')?></td>
-                    <td ><?=number_format($tc['SALDO EN MORA'],0,',','.')?></td>
-                    <td ><?=number_format($tc['IMPORTE AUTORIZ. PENDIENT'],0,',','.')?></td>
-                    <td ><?=number_format($deuda,0,',','.')?></td>
-                    <td ><?=number_format($tc['PAGO MINIMO'],0,',','.')?></td>
-                    <td ><?=$tc['DIAS EN MORA']?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO FINANCIADO'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO FACT. NO VENCIDO'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO A FACTURAR'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['SALDO EN MORA'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['IMPORTE AUTORIZ. PENDIENT'],0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($deuda,0,',','.')?></td>
+                    <td style="text-align:right"><?=number_format($tc['PAGO MINIMO'],0,',','.')?></td>
+                    <td style="text-align:right"><?=$tc['DIAS EN MORA']?></td>
               
                     <td ><?=formatoFechaDDMMAAAA($tc['FECHA VENCIM. EXTRACTO'])?></td>
                 </tr>

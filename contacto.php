@@ -29,6 +29,10 @@ $db = conect();
       .input-recaptcha{
         width:170px;   
        }
+       
+       .controls{
+           margin-bottom:4px;
+       }
     </style>
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -91,25 +95,25 @@ $db = conect();
                    <form class="form-horizontal" action='./contacto.php' method='post' name='contacto.php' id='contacto.php'>
                     <div class="control-group">
                       <!-- /Nombres -->
-                      <label class="control-label" for="nombres">Nombres: </label>
-                      <div class="controls"><input name='nombre' type="text" class="input-xlarge" id="nombre" placeholder="Nombres" required></div>
-                      <br><!-- /Apellidos -->
+                      <label class="control-label"  for="nombres">Nombres: </label>
+                      <div class="controls" ><input name='nombre' type="text" class="input-xlarge" id="nombre" placeholder="Nombres" required></div>
+                      <!-- /Apellidos -->
                       <label class="control-label" for="apellidos">Apellidos: </label>
                       <div class="controls"><input name='apellido' type="text" id="apellido" class="input-xlarge" required placeholder="Apellidos"></div>
-                      <br><!-- /Empresa -->                      
+                      <!-- /Empresa -->                      
                       <label class="control-label" for="ci">Cedula de Identidad:</label>
                       <div class="controls"><input name='ci' type="text" id="ci" class="input-xlarge" required placeholder="Cedula de identidad"></div>
-                      <br><!-- /Telefono -->                      
+                      <!-- /Telefono -->                      
                       <label class="control-label" for="telefono">Teléfono:</label>
                       <div class="controls"><input name='telefono' type="text" id="telefono" class="input-xlarge" placeholder="Telefono"></div>
-                      <br><!-- /Email -->                      
+                      <!-- /Email -->                      
                       <label class="control-label" for="email">Email:</label>
                       <div class="controls"><input name='email' type="email" id="email" class="input-xlarge" placeholder="Email" required></div>
-                      <br><!-- /Consulta -->                      
+                      <!-- /Consulta -->                      
                       <label class="control-label" for="consulta">Consulta:</label>
                       <div class="controls"><textarea rows="4" id="consulta" class="input-xlarge" name="consulta" required ></textarea>
                       </div>
-                      <br><!-- /captcha -->                      
+                      <!-- /captcha -->                      
                       <label class="control-label" for="captcha">Captcha:</label>
                       <div class="controls"><img style="border:2px #ff9933 solid;border-radius: 10px 10px 10px 10px" id="captcha" src="./resources/securimage/securimage_show.php" alt="CAPTCHA Image" />
                           <a href="#ayudaCaptcha" class="label label-info btn-info" style='display:inline;' data-toggle="popover" data-placement="bottom" data-content="Evita enviarse de forma automática con algún programa, robot o con clicks automátizados.." title="" data-original-title="" id="ayudaCaptcha">¿Que es esto?</a>
