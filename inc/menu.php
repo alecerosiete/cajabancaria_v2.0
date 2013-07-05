@@ -22,6 +22,7 @@
                             <?php if(getRole(ROLE_JUBILADO) || getRole(ROLE_PENSIONADO)) echo "<li><a href='./jubilados.php'>Pagos</a></li>"; ?>
                             <li><a href="./prestamos.php">Prestamos</a></li>
                             <li><a href="./tarjetas-de-credito.php">Tarjetas de Credito</a></li>
+                            <li><a style="font-size:13px" href="./simulador-de-prestamos.php">Simulador de Pr&eacute;stamo</a></li>
                             <?php if(getRole(ROLE_JUBILADO) || getRole(ROLE_AFILIADO)){
                               echo "<li><a href='./aportes.php'>Aportes</a></li>";  
                             } else if(getRole(ROLE_PENSIONADO)){

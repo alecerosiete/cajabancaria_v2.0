@@ -1,5 +1,62 @@
 $(document).ready(function(){
     
+    var plazo;
+    var monto;
+    /*Simulador de credito */
+    $("#plazo").change(function(){
+        var min = 6;
+        var max = 36;
+        plazo = $("#plazo").val();
+        if (isNaN($("#plazo").val())){
+            $("#msg-status").css('display','block')
+            $("#msg-status").html("Ingrese un mes valido Ej.: 12.").delay(4000).hide("fade",1000)
+            $("#plazo").val("");
+        }else if(plazo < 6 || plazo > 48){
+            $("#msg-status").css('display','block')
+            $("#msg-status").html("Plazo minimo permitido: 6 meses, maximo: 48 meses.").delay(4000).hide("fade",1000)
+            $("#plazo").val("");
+            
+            
+        }
+    })
+    $("#monto").click(function(){
+        if(plazo == undefined){
+            alert("PLAZO ES REQUERIDO");
+        }
+        
+    })
+    $("#monto").keypress(function(){
+       
+        var min = 500000;
+        var max = 500000000;
+        monto = $("#monto").val();
+        if (isNaN($("#monto").val())){
+            $("#msg-status").css('display','block')
+            $("#msg-status").html("Ingrese un monto valido Ej.: 500000.").delay(4000).hide("fade",1000)
+            $("#monto").val("");
+        }else if(monto < 500000 || monto > 500000000){
+            $("#msg-status").css('display','block')
+            $("#msg-status").html("Monto minimo permitido: Gs. 500.000, maximo: Gs. 500.000.000.").delay(4000).hide("fade",1000)
+            //$("#monto").val("");
+            $("#cuota").val("")
+            
+        }else{
+            var tasa = $("#tasa").val()
+            var resultado = (1 - (1 +  tasa / (12 * 100))^(-1 * plazo))
+            
+            $("#cuota").val(resultado)
+            $("#prestamo").val((monto * (tasa / (12 * 100))) / resultado);
+        }
+           
+        
+        
+    })
+    
+    
+    
+    
+    
+    
     set_interval();
     $(document).on('keypress',function(e){
         reset_interval();

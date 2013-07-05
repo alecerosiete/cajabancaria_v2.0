@@ -47,8 +47,14 @@ $aportes = getAportes($user['CI']);
              <?php include ('./inc/userInfo.php');?>
             <H3 style="text-align:right;color:#E35300;margin-bottom:50px">Aportes</H3>
             <hr style="border: 1px solid #E35300">
+            <div style="float:right;display: inherit" class="btn btn-mini">
+                <i class="icon-download" ></i>
+
+
+                <a href="./resources/html2pdf/examples/aportes_pdf.php">Descargar/Imprimir</a>
+            </div>
         <?php if (count($aportes)):?>
-      <table class="table table-bordered" style="font-size: 12px;background:#f5f5f5">
+      <table class="table table-bordered" style="width: 100%; font-size: 12px;background:#f5f5f5">
             <thead>
             <tr>
                 

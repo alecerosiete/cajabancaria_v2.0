@@ -50,20 +50,17 @@ $tarjetas = getTarjetas($user['CI']);
        
 <div class="hero-unit">
      <?php include ('./inc/userInfo.php');?>
-    
     <H3 style="text-align:right;color:#E35300;margin-bottom:50px">Estados de cuenta</H3>
     <hr style="border: 1px solid #E35300">
     <div style="float:right;display: inherit" class="btn btn-mini">
         <i class="icon-download" ></i>
-        <a href="./resources/print_pdf.php" target="_blank" >IMPRIMIR</a>         
+              
+        
+        <a href="./resources/html2pdf/examples/estado_de_cuenta_pdf.php">Descargar/Imprimir</a>
     </div>
     <H4>Prestamos</H4>
     <?php if(count($prestamos)):?>
-    <div style="float:right;display: inherit" class="btn btn-mini">
-        <i class="icon-download" ></i>
-
-    </div>
-    
+       
         <table style="font-size:12px" class="table table-hover">
         <thead >
         <tr>

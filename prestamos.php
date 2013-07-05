@@ -52,11 +52,14 @@ $prestamos = getPrestamos($user['CI']);
     <H3 style="text-align:right;color:#E35300;margin-bottom:50px">Pr&eacute;stamos</H3>
         
     <hr style="border: 1px solid #E35300">
-     <?php if(count($prestamos)):?>
-    <div style="float:right;display: inherit" class="btn btn-mini">
+      <div style="float:right;display: inherit" class="btn btn-mini">
         <i class="icon-download" ></i>
-    <a href="http://pdfcrowd.com/url_to_pdf/">Descargar/Imprimir</a>
+              
+        
+        <a href="./resources/html2pdf/examples/prestamos_pdf.php">Descargar/Imprimir</a>
     </div>
+     <?php if(count($prestamos)):?>
+  
     
         <table style="font-size:12px" class="table table-hover">
         <thead >
