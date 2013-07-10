@@ -1,17 +1,103 @@
 $(document).ready(function(){
     
-    var plazo;
-    var monto;
+    //var plazo = 0;
+    var monto_capital = 0;
+    var sueldo = 0;
+    var tasa = 0;
+    var plazo = 0;
     /*Simulador de credito */
+    $("#tasa").val(0);
+        $("#monto_capital").val(0);
+        $("#cuota").val(0);
+    var plazo_personal = {"12":12,"18":14,"24":15,"36":16,"48":17,"60":18,"72":19,"84":20,"96":21};
+    var plazo_promocion = {"12":9,"18":10,"24":11,"36":12,"48":13,"60":14,"96":18};
+    var plazo_hipotecario = {"240":10,"120":13};
+    var plazo_educa = {"12":8};
+    $("input[name='tipo_prestamo']").click(function(){
+        
+        
+        
+        var checado = $("input[name='tipo_prestamo']:checked").val();
+        
+        var html="<select name='select_plazo' id='id_plazo'> ";
+        html += "<option name='personal' value='0'>Seleccione un Plazo</option>";
+           
+        //var checado = $("input[name='tipo_prestamo']:checked").val();
+
+        if(checado == "personal"){
+            $.each(plazo_personal,function(plazo,tasa) {  
+                html += "<option name='personal' value='" + tasa + "'>"+ plazo+"</option>";
+            });
+
+        }else if(checado == "promocion"){
+            $.each(plazo_promocion,function(plazo,tasa) {  
+                html += "<option name='promocion' value='" + tasa + "'>"+ plazo+"</option>";
+            });
+        }else if(checado == "hipotecario"){
+            $.each(plazo_hipotecario,function(plazo,tasa) {  
+                html += "<option name='hipotecario' value='" + tasa + "'>"+ plazo+"</option>";
+            });
+        }else{
+            $.each(plazo_educa,function(plazo,tasa) {  
+                html += "<option name='educacion' value='" + tasa + "'>"+ plazo+"</option>";
+            });
+        }
+       
+        html+="</select>";
+        
+        $("#plazo").html(html)
+        $("#id_plazo").change(function(){
+            var $selected = $("#id_plazo").find('option:selected');
+            plazo = $selected.text();
+            tasa = $selected.val();
+            if(tasa == 0){
+                $("#tasa").val(0);
+            }else{
+                $("#tasa").val(tasa);
+            }
+        })
+        
+       
+    });
+     $("#btn_calcular_cuota").click(function(){
+            var min = 500000;
+            var max = 300000000;
+            monto_capital = $("#monto_capital").val();
+            if (isNaN($("#monto_capital").val())){
+                $("#msg-status").css('display','block')
+                $("#msg-status").html("Ingrese un capital valido Ej.: 500000.").delay(4000).hide("fade",1000)
+                $("#monto_capital").val("");
+            }else if(monto_capital < 500000 || monto_capital > 500000000){
+                $("#msg-status").css('display','block')
+                $("#msg-status").html("Monto minimo permitido: Gs. 500.000, maximo: Gs. 500.000.000.").delay(4000).hide("fade",1000)
+                //$("#monto").val("");
+                $("#cuota").val("")
+
+            }else{
+
+                //var tasa =  $("#tasa").val()
+
+                //alert(parseFloat(tasa));
+                var resultado = new Number(1 - (Math.pow((1 +  (tasa / (1200))),(-1 * plazo)))).toFixed(4);
+
+
+                var prestamo = new Number((monto_capital * (tasa / (1200))) / resultado).toFixed(4);
+                //$("#prestamo").val();
+                $("#cuota").val(Math.round(prestamo))
+            }
+        })
+   
+    
+    /*
     $("#plazo").change(function(){
         var min = 6;
-        var max = 36;
-        plazo = $("#plazo").val();
+        var max = 60;
+        plazo =  parseInt($("#plazo").val());
         if (isNaN($("#plazo").val())){
             $("#msg-status").css('display','block')
             $("#msg-status").html("Ingrese un mes valido Ej.: 12.").delay(4000).hide("fade",1000)
             $("#plazo").val("");
-        }else if(plazo < 6 || plazo > 48){
+        }else if(plazo < 6 || plazo > 60){
             $("#msg-status").css('display','block')
             $("#msg-status").html("Plazo minimo permitido: 6 meses, maximo: 48 meses.").delay(4000).hide("fade",1000)
             $("#plazo").val("");
@@ -19,39 +105,47 @@ $(document).ready(function(){
             
         }
     })
-    $("#monto").click(function(){
+    */
+   /*
+    $("#monto_capital").click(function(){
         if(plazo == undefined){
             alert("PLAZO ES REQUERIDO");
         }
         
     })
-    $("#monto").keypress(function(){
+    */
+   /*
+    $("#monto_capital").keypress(function(){
        
         var min = 500000;
-        var max = 500000000;
-        monto = $("#monto").val();
-        if (isNaN($("#monto").val())){
+        var max = 300000000;
+        monto_capital = $("#monto_capital").val();
+        if (isNaN($("#monto_capital").val())){
             $("#msg-status").css('display','block')
-            $("#msg-status").html("Ingrese un monto valido Ej.: 500000.").delay(4000).hide("fade",1000)
-            $("#monto").val("");
-        }else if(monto < 500000 || monto > 500000000){
+            $("#msg-status").html("Ingrese un capital valido Ej.: 500000.").delay(4000).hide("fade",1000)
+            $("#monto_capital").val("");
+        }else if(monto_capital < 500000 || monto_capital > 500000000){
             $("#msg-status").css('display','block')
             $("#msg-status").html("Monto minimo permitido: Gs. 500.000, maximo: Gs. 500.000.000.").delay(4000).hide("fade",1000)
             //$("#monto").val("");
             $("#cuota").val("")
             
         }else{
-            var tasa = $("#tasa").val()
-            var resultado = (1 - (1 +  tasa / (12 * 100))^(-1 * plazo))
             
-            $("#cuota").val(resultado)
-            $("#prestamo").val((monto * (tasa / (12 * 100))) / resultado);
+            //var tasa =  $("#tasa").val()
+            
+            //alert(parseFloat(tasa));
+            var resultado = new Number(1 - (Math.pow((1 +  (tasa / (1200))),(-1 * plazo)))).toFixed(4);
+            
+            
+            var prestamo = new Number((monto_capital * (tasa / (1200))) / resultado).toFixed(4);
+            //$("#prestamo").val();
+            $("#cuota").val(Math.round(prestamo))
         }
            
-        
-        
+     
     })
-    
+    */
     
     
     

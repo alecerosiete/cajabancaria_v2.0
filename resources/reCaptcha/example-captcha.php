@@ -6,8 +6,8 @@
 require_once('recaptchalib.php');
 
 // Get a key from https://www.google.com/recaptcha/admin/create
-$publickey = "";
-$privatekey = "";
+$publickey = "6LewbkSAAAAAPxA1EOQt5GThUIyqVKPPJ-NjIL3";
+$privatekey = "6Le1wbkSAAAAAAGn974Ws3VOtw4DVsv_ME3mBMbB";
 
 # the response from reCAPTCHA
 $resp = null;

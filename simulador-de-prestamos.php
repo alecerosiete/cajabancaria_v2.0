@@ -61,23 +61,128 @@ $db = conect();
         <H3 style="text-align:right;color:#E35300;margin-bottom:40px;">Simulador de Cr&eacute;dito</H3>
         <hr style="border: 1px solid #E35300">
         <div style="text-align: center;">
-        <table class="table table-bordered" style="width:580px;" align="center">
+        <table class="table table-bordered" style="width:580px;font-size: 14px" align="center">
+            <label>Calculo de la cuota segun el tipo de prestamo</label>
             <tr style="margin-bottom: -10px">
-                <td style="width:50%;"><label>Tasa</label></td><td><input type="text" id="taza" value="7.5 %" disabled></td>
+                <td style="width:5%;">
+                    <input type="radio" id="personal" value="personal" name="tipo_prestamo"  >
+                </td>
+                <td>
+                    <label>Personal</label>
+                </td>
+                 <td style="width:5%;">
+                     <input type="radio" id="promocion_personal" value="promocion" name="tipo_prestamo"  >
+                 </td>
+                 <td>
+                     <label>Promocion Personal</label>
+                 </td>
+            </tr>
+            <tr style="margin-bottom: -10px">
+                <td style="width:5%;">
+                    <input type="radio" id="hipotecario" value="hipotecario" name="tipo_prestamo"  >
+                </td>
+                <td>
+                    <label>Hipotecario</label>
+                </td>
+                <td style="width:5%;">
+                    <input type="radio" id="educacion" value="educacion" name="tipo_prestamo"  >
+                </td>
+                <td>
+                    <label>Educacion</label>
+                </td>
             </tr>
             <tr>
-                <td style="width:50%"><label>Plazo</label></td><td><input type="text" id="plazo" value="" placeholder="Ej.: 12" required> Meses</td>
+                <td colspan="2" style="width:50%">
+                    <label>Capital</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="monto_capital" value="" placeholder="Ej.: 25000000" required> Gs.
+                </td>
             </tr>
+            
+            
             <tr>
-                <td style="width:50%"><label>Monto Solicitado</label></td><td><input type="text" id="monto" value="" placeholder="Ej.: 25000000" required> Gs.</td>
+                <td colspan="2" style="width:50%">
+                    <label>Plazo</label>
+                </td>
+                <td colspan="2" id="plazo">
+                </td>
             </tr>
+            <tr style="margin-bottom: -10px">
+                <td colspan="2" style="width:50%;">
+                    <label>Tasa</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="tasa"  disabled>%
+                </td>
+            </tr>            
             <tr>
-                <td style="width:50%"><label>Valor de Cuota Total</label></td><td><input type="text" id="cuota" value="" disabled> Gs.</td>
+                <td  colspan="2"  style="width:50%">
+                    <label class="btn" id="btn_calcular_cuota">Calcular Valor de la Cuota</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="cuota"  disabled> Gs.
+                </td>
             </tr>
-            <tr>
-                <td style="width:50%"><label>Valor total del Pr&eacute;stamo</label></td><td><input type="text" id="prestamo" value="" disabled> Gs.</td>
-            </tr>
+            
         </table>      
+            <hr>
+           
+            Calculo de porcentaje de endeudamiento
+        <table class="table table-bordered" style="width:580px;font-size: 14px" align="center">
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Sueldo</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="sueldo"> Gs.
+                </td>
+                
+            </tr>
+            
+            <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Aporte</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="aporte" > Gs.
+                </td>
+           </tr> 
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Seguro</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="seguro" disabled> Gs.
+                </td>
+           </tr> 
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Disponible</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="disponible" disabled> Gs.
+                </td>
+           </tr>  
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>% Endeudamiento</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="endeudamiento" disabled> Gs.
+                </td>
+           </tr> 
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Monto maximo de cuota permitida</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="max_cuota_permitida" disabled> Gs.
+                </td>
+           </tr>
+        </table>      
+            <hr>
+            RESULTADO
         </div>
         
         <hr>
