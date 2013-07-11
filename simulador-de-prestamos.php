@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 require './inc/session.inc';
 assertUser();
@@ -124,6 +124,27 @@ $db = conect();
                     <input type="text" id="cuota"  disabled> Gs.
                 </td>
             </tr>
+            <tr>
+                <td  colspan="2" style="width:50%">
+                    <label>Seguro*</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="seguro" disabled> Gs.
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:50%">
+                    <label>Total de la cuota</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="total_cuota"  disabled> Gs.
+                </td>
+            </tr>
+             <tr >
+                  <td colspan="4">
+                  <h6>* El seguro no se tiene en cuenta para el analisis de prestamos</h6>
+                  </td>
+            </tr>
             
         </table>      
             <hr>
@@ -150,18 +171,18 @@ $db = conect();
            </tr> 
            <tr>
                 <td  colspan="2"  style="width:50%">
-                    <label>Seguro</label>
+                    <label>Cuota de otros prestamos (Si hubiere)</label>
                 </td>
                 <td colspan="2">
-                    <input type="text" id="seguro" disabled> Gs.
+                    <input type="text" id="cuota_otros_prestamos" > Gs.
                 </td>
            </tr> 
-           <tr>
+            <tr>
                 <td  colspan="2"  style="width:50%">
-                    <label>Disponible</label>
+                    <label class="btn" id="btn_calcular_disponibilidad">Calcular la Disponibilidad</label>
                 </td>
                 <td colspan="2">
-                    <input type="text" id="disponible" disabled> Gs.
+                    <input type="text" id="disponibilidad" disabled> Gs.
                 </td>
            </tr>  
            <tr>
@@ -169,7 +190,7 @@ $db = conect();
                     <label>% Endeudamiento</label>
                 </td>
                 <td colspan="2">
-                    <input type="text" id="endeudamiento" disabled> Gs.
+                    <input type="text" id="endeudamiento" disabled> %.
                 </td>
            </tr> 
            <tr>
@@ -182,7 +203,7 @@ $db = conect();
            </tr>
         </table>      
             <hr>
-            RESULTADO
+            RESULTADO: <div id="result"></div>
         </div>
         
         <hr>

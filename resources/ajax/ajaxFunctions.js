@@ -5,6 +5,8 @@ $(document).ready(function(){
     var sueldo = 0;
     var tasa = 0;
     var plazo = 0;
+    var seguro = 11875;
+    var cuota = 0;
     /*Simulador de credito */
     $("#tasa").val(0);
         $("#monto_capital").val(0);
@@ -14,8 +16,9 @@ $(document).ready(function(){
     var plazo_hipotecario = {"240":10,"120":13};
     var plazo_educa = {"12":8};
     $("input[name='tipo_prestamo']").click(function(){
-        
-        
+        $("#cuota").val(0)
+        $("#seguro").val(0)
+        $("#total_cuota").val(0)
         
         var checado = $("input[name='tipo_prestamo']:checked").val();
         
@@ -59,7 +62,7 @@ $(document).ready(function(){
         
        
     });
-     $("#btn_calcular_cuota").click(function(){
+    $("#btn_calcular_cuota").click(function(){
             var min = 500000;
             var max = 300000000;
             monto_capital = $("#monto_capital").val();
@@ -81,76 +84,64 @@ $(document).ready(function(){
                 var resultado = new Number(1 - (Math.pow((1 +  (tasa / (1200))),(-1 * plazo)))).toFixed(4);
 
 
-                var prestamo = new Number((monto_capital * (tasa / (1200))) / resultado).toFixed(4);
+                cuota = new Number((monto_capital * (tasa / (1200))) / resultado).toFixed(4);
                 //$("#prestamo").val();
-                $("#cuota").val(Math.round(prestamo))
+                $("#cuota").val(Math.round(cuota))
+                $("#seguro").val(seguro);
+                $("#total_cuota").val(seguro+Math.round(cuota));
             }
-        })
-   
+            
+            $("#btn_calcular_disponibilidad").click(function(){
+                
+                var min = 500000;
+                var max = 300000000;
+                var sueldo = $("#sueldo").val();
+                var aporte = $("#aporte").val();
+                var cuota_otros_prestamos =  $("#cuota_otros_prestamos").val();
+                
+                if (isNaN(sueldo)){
+                    $("#msg-status").css('display','block')
+                    $("#msg-status").html("Ingrese un sueldo valido Ej.: 500000.").delay(4000).hide("fade",1000)
+                    $("#sueldo").val(0);
+                                        
+                }else if(sueldo < 1605408 || sueldo > 300000000){
+                    $("#msg-status").css('display','block')
+                    $("#msg-status").html("Sueldo minimo permitido: Gs. 1.605.408, maximo: Gs. 500.000.000.").delay(4000).hide("fade",1000)
+                    //$("#monto").val("");
+                    $("#sueldo").val(0)
+                    
+                }else if (isNaN(aporte)){
+                    $("#msg-status").css('display','block')
+                    $("#msg-status").html("Ingrese un aporte valido Ej.: 1.297.000.").delay(4000).hide("fade",1000)
+                    $("#aporte").val(0);
+                    
+                }else if(isNaN(cuota_otros_prestamos)){
+                    $("#msg-status").css('display','block')
+                    $("#msg-status").html("Ingrese un monto valido Ej.: 1.297.000.").delay(4000).hide("fade",1000)
+                    $("#cuota_otros_prestamos").val(0);
+                    alert("no es numero")
+                }else {
+                    
+                    var disponibilidad = sueldo-aporte;
+                    $("#disponibilidad").val(disponibilidad);
+                    
+                    var cuotas = Math.round(cuota)+Math.round(cuota_otros_prestamos);
+                    //alert("Cuota: "+cuota+" cuota_otros_prestamos: "+cuota_otros_prestamos)
+                    var porcentaje_endeudamiento = new Number(cuotas/disponibilidad*100).toFixed(4);
+                    $("#endeudamiento").val(porcentaje_endeudamiento);
+                    if(Math.round(porcentaje_endeudamiento) < 70){
+                        $("#result").html("Reune los Requisitos");
+                    }else{
+                        $("#result").html("NO Reune los Requisitos");
+                    }
+                        
+                }
+            })
+            
+    })
     
-    /*
-    $("#plazo").change(function(){
-        var min = 6;
-        var max = 60;
-        plazo =  parseInt($("#plazo").val());
-        if (isNaN($("#plazo").val())){
-            $("#msg-status").css('display','block')
-            $("#msg-status").html("Ingrese un mes valido Ej.: 12.").delay(4000).hide("fade",1000)
-            $("#plazo").val("");
-        }else if(plazo < 6 || plazo > 60){
-            $("#msg-status").css('display','block')
-            $("#msg-status").html("Plazo minimo permitido: 6 meses, maximo: 48 meses.").delay(4000).hide("fade",1000)
-            $("#plazo").val("");
-            
-            
-        }
-    })
-    */
-   /*
-    $("#monto_capital").click(function(){
-        if(plazo == undefined){
-            alert("PLAZO ES REQUERIDO");
-        }
-        
-    })
-    */
-   /*
-    $("#monto_capital").keypress(function(){
-       
-        var min = 500000;
-        var max = 300000000;
-        monto_capital = $("#monto_capital").val();
-        if (isNaN($("#monto_capital").val())){
-            $("#msg-status").css('display','block')
-            $("#msg-status").html("Ingrese un capital valido Ej.: 500000.").delay(4000).hide("fade",1000)
-            $("#monto_capital").val("");
-        }else if(monto_capital < 500000 || monto_capital > 500000000){
-            $("#msg-status").css('display','block')
-            $("#msg-status").html("Monto minimo permitido: Gs. 500.000, maximo: Gs. 500.000.000.").delay(4000).hide("fade",1000)
-            //$("#monto").val("");
-            $("#cuota").val("")
-            
-        }else{
-            
-            //var tasa =  $("#tasa").val()
-            
-            //alert(parseFloat(tasa));
-            var resultado = new Number(1 - (Math.pow((1 +  (tasa / (1200))),(-1 * plazo)))).toFixed(4);
-            
-            
-            var prestamo = new Number((monto_capital * (tasa / (1200))) / resultado).toFixed(4);
-            //$("#prestamo").val();
-            $("#cuota").val(Math.round(prestamo))
-        }
-           
      
-    })
-    */
-    
-    
-    
-    
-    
+     
     set_interval();
     $(document).on('keypress',function(e){
         reset_interval();
