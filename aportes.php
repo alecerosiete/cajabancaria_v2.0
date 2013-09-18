@@ -51,7 +51,7 @@ $aportes = getAportes($user['CI']);
                 <i class="icon-download" ></i>
 
 
-                <a href="./resources/html2pdf/examples/aportes_pdf.php">Descargar/Imprimir</a>
+                <a href="./resources/html2pdf/examples/aportes_pdf.php" target="_blank">Descargar/Imprimir</a>
             </div>
         <?php if (count($aportes)):?>
       <table class="table table-bordered" style="width: 100%; font-size: 12px;background:#f5f5f5">

@@ -50,7 +50,7 @@
                     <li><a href="#">Links de interes</a>
                         <ul>
                             <li><a href="./reservaciones.php">Reservaciones</a></li>
-                            <li><a href="#">Inmuebles</a></li>
+                            <li><a href="http://raulaguilera.info/caja/" target="_blank" >Inmuebles</a></li>
                         </ul>
                     </li>
                     <?php if(getPerfil(ROLE_AUDITOR)){?>

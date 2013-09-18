@@ -68,17 +68,20 @@ $db = conect();
                              <tr>
                                  <td>
                                      <div id="startDate" class="input-append date">
-                                        <input type="text" id="startDateConsulta" value="<?= date('d-m-Y')." 00:00:00"?>"></input>
-                                        <span class="add-on">
+                                        <!--input type="text" id="startDateConsulta" value="<?= date('d-m-Y')?>"></input-->
+                                        <input type="text" id="startDateConsulta" size="10" maxlength="10" placeholder="dd/mm/aaaa"></input>
+                                        
+                                        <!--span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                        </span>
+                                        </span-->
                                       </div>
                                  </td>
                                   <td><div id="endDate" class="input-append date">
-                                        <input type="text" id="endDateConsulta" value="<?= date('d-m-Y')." 23:59:59"?>"></input>
-                                        <span class="add-on">
+                                        <!--input type="text" id="endDateConsulta" value="<?= date('d-m-Y')?>"></input-->
+                                        <input type="text" id="endDateConsulta" size="10" maxlength="10" placeholder="dd/mm/aaaa"></input>
+                                        <!--span class="add-on">
                                           <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                        </span>
+                                        </span-->
                                       </div>
                                   </td>
                                    <td>
@@ -113,6 +116,7 @@ $db = conect();
                                     </div>
                                  </td>
                              </tr>
+                             
                             <script type="text/javascript"
                                     src="./resources/bootstrap/assets/js/jquery.min.js">
                             </script>
@@ -127,20 +131,29 @@ $db = conect();
                                     src="./resources/bootstrap/assets/js/bootstrap-datetimepicker.pt-BR.js">
                             </script>
                             <script src="./resources/bootstrap/assets/js/bootstrap-datepicker.js"></script>
+                            <!--
                             <script type="text/javascript">
-
+								
                               $('#startDate').datetimepicker({
-                                format: 'dd-MM-yyyy hh:mm:ss',
+                                format: 'dd-MM-yyyy',
                                 language: 'pt-BR'
                               });
                               $('#endDate').datetimepicker({
-                                format: 'dd-MM-yyyy hh:mm:ss',
+                                format: 'dd-MM-yyyy',
                                 language: 'pt-BR'
                               });
 
                               // disabling dates
 
                             </script>
+                            -->
+                            <script src="./resources/bootstrap/assets/js/jquery.maskedinput-1.2.2-co.min.js"></script>
+                            <script type="text/javascript">
+								jQuery(function($){
+									$("#startDateConsulta").mask("99/99/9999");
+									$("#endDateConsulta").mask("99/99/9999");
+								});
+							</script>
                         </tbody>
                    </table>
 
@@ -187,5 +200,6 @@ $db = conect();
             });
         </script>
         <script src="./resources/ajax/ajaxFunctions.js"></script>
+        
   </body>
 </html>

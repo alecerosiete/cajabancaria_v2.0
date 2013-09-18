@@ -4,8 +4,7 @@ require_once '../inc/conexion-functions.php';
 require '../inc/sql-functions.php';
 $db = conect();
 $user = getUser();
-//$ci = $user['data']['CEDULA DE IDENTIDAD'];
-//$pin = $user['data']['PINWEB'];
+
 $ci = $_POST['ci'];
 $nombre = $_POST['nombre'];
 $tipo_de_usuario = $_POST['tipo_de_usuario'];

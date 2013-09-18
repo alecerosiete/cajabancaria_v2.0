@@ -1,4 +1,4 @@
-    <?php
+ <?php
 
 require './inc/session.inc';
 assertUser();
@@ -140,11 +140,7 @@ $db = conect();
                     <input type="text" id="total_cuota"  disabled> Gs.
                 </td>
             </tr>
-             <tr >
-                  <td colspan="4">
-                  <h6>* El seguro no se tiene en cuenta para el analisis de prestamos</h6>
-                  </td>
-            </tr>
+             
             
         </table>      
             <hr>
@@ -166,7 +162,7 @@ $db = conect();
                     <label>Aporte</label>
                 </td>
                 <td colspan="2">
-                    <input type="text" id="aporte" > Gs.
+                    <input type="text" id="aporte" disabled> Gs.
                 </td>
            </tr> 
            <tr>
@@ -175,6 +171,22 @@ $db = conect();
                 </td>
                 <td colspan="2">
                     <input type="text" id="cuota_otros_prestamos" > Gs.
+                </td>
+           </tr> 
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Tarjeta de Cr&eacute;dito</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="tarjeta_de_credito" > Gs.
+                </td>
+           </tr> 
+           <tr>
+                <td  colspan="2"  style="width:50%">
+                    <label>Codeudor</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" id="codeudor" > Gs.
                 </td>
            </tr> 
             <tr>

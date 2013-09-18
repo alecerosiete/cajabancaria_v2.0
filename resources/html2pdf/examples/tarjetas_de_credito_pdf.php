@@ -38,9 +38,8 @@ function conect()
     include(dirname(__FILE__).'/res/sql-functions.php');
     
     
-    include(dirname(__FILE__).'/res/prestamos_page_pdf.php');   
-    include(dirname(__FILE__).'/res/aportes_page_pdf.php');
- include(dirname(__FILE__).'/res/tarjetas_page_pdf.php');
+    
+    include(dirname(__FILE__).'/res/tarjetas_page_pdf.php');
     
     $content = ob_get_clean();
 
@@ -56,7 +55,7 @@ function conect()
         $html2pdf->pdf->SetDisplayMode('fullpage');
 //      $html2pdf->pdf->SetProtection(array('print'), 'spipu');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('estado_de_cuenta.pdf');
+        $html2pdf->Output('tarjetas.pdf');
     }
     catch(HTML2PDF_exception $e) {
         echo $e;

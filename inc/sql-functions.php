@@ -11,14 +11,10 @@ function consultaPerfil($ci){
 
     if( $item = $statement->fetch(PDO::FETCH_ASSOC) ) {
         $p = array('PERFIL' => $item);
-
         $db = null;
-        
       } else {
         $p = null;
         $db = null;
-        
-
       }
       return $p['PERFIL'];
 }
@@ -152,16 +148,17 @@ function getPrestamos($ci){
 }
 
 
+
 function getTipoDePrestamo($id){
     $db = conect();
     
-    $sql = "SELECT * FROM prw_clase_de_prestamo WHERE id = $id";
+    $sql = "SELECT * FROM prparcod WHERE CODIGO = $id";
     $statement = $db->prepare($sql);
     $statement->execute();
     $tipoPrestamo = $statement->fetch(PDO::FETCH_ASSOC);
     //print_r($rowInfo);
     $db = null;
-    return $tipoPrestamo['DESCRIPCION'];
+    return $tipoPrestamo[`NOMBRE DEL CODIGO`];
    
 }
 

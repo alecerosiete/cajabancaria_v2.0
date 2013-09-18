@@ -52,6 +52,12 @@ $tarjetas = getTarjetas($user['CI']);
              
         <H3 style="text-align:right;color:#E35300;margin-bottom:50px">Tarjetas de Cr&eacute;dito</H3>
         <hr style="border: 1px solid #E35300">
+        <div style="float:right;display: inherit" class="btn btn-mini">
+        <i class="icon-download" ></i>
+              
+        
+        <a href="./resources/html2pdf/examples/tarjetas_de_credito_pdf.php" target="_blank">Descargar/Imprimir</a>
+    </div>
         <?php if (count($tarjetas)):?>
         <?php foreach ($tarjetas as $tc):?>
             

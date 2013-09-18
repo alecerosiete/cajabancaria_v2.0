@@ -151,19 +151,19 @@ if($mensaje > 0 ){
               <tr>
                 <th style="text-align:left">Ciudad: </th><td><?= $ciudad ?></td>
                 <th style="text-align:left">Localidad: </th><td ><?= $localidad ?></td>
-                <th style="text-align:left">Perfil: </th><td><?= strtoupper($user['data']['perfil_de_usuario']) ?></td>
+                <th style="text-align:left">Linea Baja 1:</th><td><?= $userInfo[0]['TELEFONO 1'] ?></td>
                 
               </tr>
               <tr>
                   <th style="text-align:left">Celular 1: </th><td ><?= $userInfo[0]['CELULAR 1'] ?></td>
                   <th style="text-align:left">Celular 2: </th><td ><?= $userInfo[0]['CELULAR 2'] ?></td>
-                  <th style="text-align:left">Linea Baja 1: </th><td><?= $userInfo[0]['TELEFONO 1'] ?></td>
+                  <th style="text-align:left"> </th><td></td>
                   
               </tr>
               
               <tr>
                   <th style="text-align:left">Linea Baja 2: </th><td><?= $userInfo[0]['TELEFONO 2'] ?></td>
-                  <th style="text-align:left">Email: </th><td colspan="3"><?= $userInfo[0]['CORREO ELECTRONICOWEB'] ?></td>
+                  <th style="text-align:left">Email: </th><td colspan="3"><?= $userInfo[0]['CORREO ELECTRONICO'] ?></td>
                   
               </tr>
              
@@ -270,7 +270,7 @@ if($mensaje > 0 ){
                         <td><label>Linea Baja 2: </label></td>
                         <td><input type="text" id='linea-baja-2' value="<?= $userInfo[0]['TELEFONO 2'] ?>"></td>
                         <td><label>Email: </label></td>
-                        <td><input type="text" id="e-mail" value="<?= $userInfo[0]['CORREO ELECTRONICOWEB'] ?>"></td>
+                        <td><input type="text" id="e-mail" value="<?= $userInfo[0]['CORREO ELECTRONICO'] ?>"></td>
                
                     </tr>
                </table>

@@ -7,6 +7,7 @@ $(document).ready(function(){
     var plazo = 0;
     var seguro = 11875;
     var cuota = 0;
+    var aporte = 0;
     /*Simulador de credito */
     $("#tasa").val(0);
         $("#monto_capital").val(0);
@@ -62,6 +63,9 @@ $(document).ready(function(){
         
        
     });
+    
+    
+				
     $("#btn_calcular_cuota").click(function(){
             var min = 500000;
             var max = 300000000;
@@ -91,44 +95,78 @@ $(document).ready(function(){
                 $("#total_cuota").val(seguro+Math.round(cuota));
             }
             
-            $("#btn_calcular_disponibilidad").click(function(){
-                
-                var min = 500000;
-                var max = 300000000;
-                var sueldo = $("#sueldo").val();
-                var aporte = $("#aporte").val();
-                var cuota_otros_prestamos =  $("#cuota_otros_prestamos").val();
-                
-                if (isNaN(sueldo)){
+            
+    })
+     $("#sueldo").change(function(){
+		 
+		 aporte = $("#aporte").val(Math.round($("#sueldo").val()*0.11));
+		 if (isNaN($("#sueldo").val())){
                     $("#msg-status").css('display','block')
                     $("#msg-status").html("Ingrese un sueldo valido Ej.: 500000.").delay(4000).hide("fade",1000)
                     $("#sueldo").val(0);
+                    $("#aporte").val(0);
                                         
-                }else if(sueldo < 1605408 || sueldo > 300000000){
+         }else if (isNaN($("#codeudor").val())){
+                    $("#msg-status").css('display','block')
+                    $("#msg-status").html("Ingrese un monto valido Ej.: 500000.").delay(4000).hide("fade",1000)
+                    $("#codeudor").val(0);
+                    
+                                        
+         }else if (isNaN($("#tarjeta_de_credito").val())){
+                    $("#msg-status").css('display','block')
+                    $("#msg-status").html("Ingrese un monto valido Ej.: 500000.").delay(4000).hide("fade",1000)
+                    $("#tarjeta_de_credito").val(0);
+                    
+                                        
+         }
+			 
+	 });
+    
+    
+    $("#btn_calcular_disponibilidad").click(function(){
+                
+                var min = 500000;
+                var max = 300000000;
+                sueldo = $("#sueldo").val();
+                
+                var calc_aporte = Math.round(sueldo*0.11)
+                
+                
+             
+                var cuota_otros_prestamos =  $("#cuota_otros_prestamos").val();
+                var tarjeta_de_credito = $("#tarjeta_de_credito").val();
+                var codeudor = $("#codeudor").val();
+                
+                if(sueldo < 1605408 || sueldo > 300000000){
                     $("#msg-status").css('display','block')
                     $("#msg-status").html("Sueldo minimo permitido: Gs. 1.605.408, maximo: Gs. 500.000.000.").delay(4000).hide("fade",1000)
                     //$("#monto").val("");
                     $("#sueldo").val(0)
                     
-                }else if (isNaN(aporte)){
+                }else if(isNaN(tarjeta_de_credito)){
                     $("#msg-status").css('display','block')
-                    $("#msg-status").html("Ingrese un aporte valido Ej.: 1.297.000.").delay(4000).hide("fade",1000)
-                    $("#aporte").val(0);
+                    $("#msg-status").html("Ingrese un monto valido Ej.: 1.297.000.").delay(4000).hide("fade",1000)
+                    $("#tarjeta_de_credito").val(0);
                     
                 }else if(isNaN(cuota_otros_prestamos)){
                     $("#msg-status").css('display','block')
                     $("#msg-status").html("Ingrese un monto valido Ej.: 1.297.000.").delay(4000).hide("fade",1000)
                     $("#cuota_otros_prestamos").val(0);
-                    alert("no es numero")
+                    
                 }else {
                     
-                    var disponibilidad = sueldo-aporte;
-                    $("#disponibilidad").val(disponibilidad);
+                    var disponibilidad = sueldo-calc_aporte;
+                   
                     
-                    var cuotas = Math.round(cuota)+Math.round(cuota_otros_prestamos);
-                    //alert("Cuota: "+cuota+" cuota_otros_prestamos: "+cuota_otros_prestamos)
-                    var porcentaje_endeudamiento = new Number(cuotas/disponibilidad*100).toFixed(4);
+                    $("#disponibilidad").val(disponibilidad);
+                    //alert("tarjeta: "+tarjeta_de_credito+" codeudor: "+codeudor)
+                    var cuotas = Math.round(cuota)+Math.round(cuota_otros_prestamos)+Math.round(tarjeta_de_credito)+Math.round(codeudor);
+                    
+                    var porcentaje_endeudamiento = new Number(cuotas/disponibilidad*100).toFixed(2);
                     $("#endeudamiento").val(porcentaje_endeudamiento);
+                    $("#max_cuota_permitida").val(Math.round(disponibilidad*70/100));
+                    
+                    
                     if(Math.round(porcentaje_endeudamiento) < 70){
                         $("#result").html("Reune los Requisitos");
                     }else{
@@ -137,11 +175,13 @@ $(document).ready(function(){
                         
                 }
             })
-            
-    })
+	
     
-     
-     
+    
+    
+    
+    
+    
     set_interval();
     $(document).on('keypress',function(e){
         reset_interval();
@@ -430,11 +470,43 @@ $(document).ready(function(){
     /* Listar Datos Reservacion */
     $('#btn-get-reservas').click(function(){
         //alert("procesado...")
-        //var rows = $("#tipoLocal").val();
-        var start = $("#startDateConsulta").val()
+	
+		//INICIO
+        var start = $("#startDateConsulta").val();        
+        var aaaa_start = start.substring(6,10);
+        var mm_start = start.substring(3,5);
+        var dia_reserva_start = start.substring(0,2);
+        
+        hh_inicio = start.substring(11,13);
+        mm_inicio = start.substring(14,16);
        
+        //FIN
         var end = $("#endDateConsulta").val();
-       
+        var aaaa_end = end.substring(6,10);
+        var mm_end = end.substring(3,5);
+        var dia_reserva_end = end.substring(0,2);
+        
+        hh_final = end.substring(11,13);
+        mm_final = end.substring(14,16);
+
+        //alert(" De: "+aaaa_start+"-"+mm_start+"-"+dia_reserva_start+" "+hh_inicio+":"+mm_inicio+" A: "+aaaa_end+"-"+mm_end+"-"+dia_reserva_end+" "+hh_final+":"+mm_final);
+        
+        //Validaciones de rango de fecha
+        if(aaaa_start > aaaa_end){
+			alert("Error, el año inicial es mayor al año final");
+			return 0;
+		} else if(aaaa_start == aaaa_end){
+			if(mm_start > mm_end){
+				alert("Error, el mes inicial es mayor al mes final");
+				return 0;
+			} else if(mm_start == mm_end){
+				if(dia_reserva_start > dia_reserva_end){
+					alert("Error, el dia inicial es mayor al dia final");
+					return 0;    
+				}
+			}
+		}
+		
         var tipo = $("#tipoLocal").val();
        
         var rows = $("#cantidadRegistros").val();
@@ -443,10 +515,20 @@ $(document).ready(function(){
         
          $.ajax({
             type: "POST",
-            url: "/portal2/actions/listaReservas.php",
+            //url: "/portal2/actions/listaReservas.php",
+            url: "/portal2/actions/listaReservas2.php",
             data: {
-                start:start,
-                end:end,
+                
+                aaaa_start:aaaa_start,
+                mm_start:mm_start,
+                dia_reserva_start:dia_reserva_start,
+                hh_inicio:hh_inicio,
+                mm_inicio:mm_inicio,
+                aaaa_end:aaaa_end,
+                mm_end:mm_end,
+                dia_reserva_end:dia_reserva_end,
+                hh_final:hh_final,
+                mm_final:mm_final,
                 tipo:tipo,
                 rows:rows
             }

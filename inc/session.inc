@@ -206,6 +206,7 @@ function formatoFecha($fecha)
     return $dd."/".$mm."/".$yyyy;
 }
 
+
 function formatoFechaMMAA($fecha)
 {
     if(strlen($fecha) == 4){
@@ -221,6 +222,14 @@ function formatoFechaMMAAAA($fecha)
         return substr($fecha, 0, 2)."/".substr($fecha, 2, 4);
     }else{
         return "0".substr($fecha, 0, 1)."/".substr($fecha, 1, 4);
+    }
+}
+
+function formatoFechaAAAAMMDD($fecha){
+	if(strlen($fecha) == 8){
+        return substr($fecha, 0, 4)."/".substr($fecha, 4, 2)."/".substr($fecha, 6, 2);
+    }else{
+        return substr($fecha, 0, 4)."/".substr($fecha, 4, 2)."/0".substr($fecha, 6, 2);
     }
 }
 
@@ -257,4 +266,18 @@ function string2url($cadena) {
         $cadena = preg_replace('#-$#','',$cadena);
         $cadena = preg_replace('#^-#','',$cadena);
 	return $cadena;
+}
+
+function formatoHHMM($hhmm){
+	$hh_mm = $hhmm;
+	if(strlen($hhmm) == 4){
+		$hh_mm = substr($hhmm,0,2);
+		$hh_mm .= ":".substr($hhmm,2,2);
+	}else if(strlen($hhmm) == 3){
+		$hh_mm = substr($hhmm,0,1);
+		$hh_mm .= ":".substr($hhmm,1,2);
+	}
+	return $hh_mm;
+
+	
 }

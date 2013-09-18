@@ -56,7 +56,7 @@ $prestamos = getPrestamos($user['CI']);
         <i class="icon-download" ></i>
               
         
-        <a href="./resources/html2pdf/examples/prestamos_pdf.php">Descargar/Imprimir</a>
+        <a href="./resources/html2pdf/examples/prestamos_pdf.php" target="_blank">Descargar/Imprimir</a>
     </div>
      <?php if(count($prestamos)):?>
   
@@ -81,7 +81,8 @@ $prestamos = getPrestamos($user['CI']);
         <?php foreach ($prestamos as $p):?>
         <tr>
             <td style="text-align:left"><?=$p['NUMERO DE PRESTAMO']?></td>
-            <td style="text-align:left"><?= getTipoDePrestamo($p['TIPO DE PRESTAMO']) != '' ? getTipoDePrestamo($p['TIPO DE PRESTAMO']): 'No definido';?></td>
+            <!--td style="text-align:left"><?= getTipoDePrestamo($p['D']) != '' ? getTipoDePrestamo($p['D']): $p['TIPO DE PRESTAMO'];?></td-->
+			<td style="text-align:left"><?= $p['D']?></td>
             <td style="text-align:center"><?=formatoFecha($p['FECHA DE LIQUIDACION'])?></td>
             <td style="text-align:right"><?=$p['PLAZO']?></td>
             <td style="text-align:right"><?=$p['PORCENTAJE DE INTERES']?> %</td>
