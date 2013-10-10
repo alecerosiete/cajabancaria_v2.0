@@ -7,7 +7,7 @@ require './inc/conexion-functions.php';
 require './inc/sql-functions.php';
 addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Contactos");
 $db = conect();
-
+$userInfo = getUserInfo();
 
 ?>
 <!DOCTYPE html>
@@ -58,6 +58,7 @@ $db = conect();
           </div>
           
     <div class="hero-unit">
+        <?php include ('./inc/userInfo.php');?>
          <H3 style="text-align:right;color:#E35300;margin-bottom:50px">Formulario de contacto</H3>
         <hr style="border: 1px solid #E35300">
                    
@@ -66,7 +67,7 @@ $db = conect();
                     $securimage = new Securimage();
                     
                     
-                    $destinatario = "aruizdiaz@gmail.com";
+                    $destinatario = "webmaster@cajabancaria.gov.py";
                     if (isset ($_POST['enviar'])) {
                         if ($securimage->check($_POST['captcha_code']) == false) {
                             // the code was incorrect
@@ -90,25 +91,27 @@ $db = conect();
                    }
                         
                 ?> 
+                
+                                
                 <p>Si desea hacernos alguna consulta o sugerencia, le invitamos a completar el siguiente formulario, su consulta nos interesa.</p>
                 <div class="formulario_contactos" style='margin-left:20%;'>
                    <form class="form-horizontal" action='./contacto.php' method='post' name='contacto.php' id='contacto.php'>
                     <div class="control-group">
                       <!-- /Nombres -->
-                      <label class="control-label"  for="nombres">Nombres: </label>
-                      <div class="controls" ><input name='nombre' type="text" class="input-xlarge" id="nombre" placeholder="Nombres" required></div>
+                      
+                      <div class="controls" ><input name='nombre' type="hidden" class="input-xlarge" id="nombre" value="<?=$userInfo[0]['NOMBRE']?>" placeholder="Nombres" required></div>
                       <!-- /Apellidos -->
-                      <label class="control-label" for="apellidos">Apellidos: </label>
-                      <div class="controls"><input name='apellido' type="text" id="apellido" class="input-xlarge" required placeholder="Apellidos"></div>
+                      
+                      <div class="controls"><input name='apellido' type="hidden" id="apellido" class="input-xlarge" value="<?= $userInfo[0]['APELLIDO'] ?>" required placeholder="Apellidos"></div>
                       <!-- /Empresa -->                      
-                      <label class="control-label" for="ci">Cedula de Identidad:</label>
-                      <div class="controls"><input name='ci' type="text" id="ci" class="input-xlarge" required placeholder="Cedula de identidad"></div>
+                      
+                      <div class="controls"><input name='ci' type="hidden" id="ci" class="input-xlarge" value="<?= $userInfo[0]['CEDULA DE IDENTIDAD'] ?>" required placeholder="Cedula de identidad"></div>
                       <!-- /Telefono -->                      
-                      <label class="control-label" for="telefono">Teléfono:</label>
-                      <div class="controls"><input name='telefono' type="text" id="telefono" class="input-xlarge" placeholder="Telefono"></div>
+                      
+                      <div class="controls"><input name='telefono' type="hidden" id="telefono" class="input-xlarge" value = "<?= $userInfo[0]['TELEFONO 1'] ?>" placeholder="Telefono"></div>
                       <!-- /Email -->                      
-                      <label class="control-label" for="email">Email:</label>
-                      <div class="controls"><input name='email' type="email" id="email" class="input-xlarge" placeholder="Email" required></div>
+                      
+                      <div class="controls"><input name='email' type="hidden" id="email" class="input-xlarge" value="<?= $userInfo[0]['CORREO ELECTRONICO'] ?>" placeholder="Email" required></div>
                       <!-- /Consulta -->                      
                       <label class="control-label" for="consulta">Consulta:</label>
                       <div class="controls"><textarea rows="4" id="consulta" class="input-xlarge" name="consulta" required ></textarea>
@@ -126,29 +129,24 @@ $db = conect();
                       <br><br><button class="btn btn-large" id="btn-enviar" name="enviar" type="submit">Enviar</button>
                       </div>
                     </div>
-                 </form>
-                    
-          
-
-
-
-      
+                 </form>                  
                 <div class="clearfix"></div>
-            </div>
+			</div>
                      
-        <hr>
-        <footer>
-            <div class="footer">
-                 Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2012 - Todos los Derechos Reservados
-         www.cajabancaria.gov.py <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
-            </div> 
-        </footer>
-        <hr>   
+	</div>
         
     </div> <!-- /container -->
-    
+
     <?php require './inc/footer.php'; ?>
-    
+            <footer>
+		<div class="fluid">
+		<hr>
+		<div class="footer-full" style="color:#ffffff;width:100%;text-align:center;font-size:12px;background:url(./resources/images/bg.png) repeat-x; background: url(./resources/images/bg.png) repeat-x;background-position: bottom;height: 57px;padding-top: 20px;">
+             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2013 - Todos los Derechos Reservados - <a href="./terminos-y-condiciones.php" style="color:#ffffff" >Terminos y Condiciones</a> -
+			<a href="http://www.cajabancaria.gov.py" style="color:#ffffff" target="_blank">www.cajabancaria.gov.py</a> <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
+        </div> 
+        </div> 
+    </footer>
     <script type="text/javascript">
             // Executes the function when DOM will be loaded fully
             $(document).ready(function () {	
@@ -177,4 +175,6 @@ $db = conect();
           </script>
 
   </body>
+
 </html>
+

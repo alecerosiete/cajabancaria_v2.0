@@ -99,13 +99,19 @@ $query .= " WHERE AAMD_RESERVA BETWEEN $AAAAMM_RESERVA_INICIO AND $AAAAMM_RESERV
            
            if($html == ""){
 if($tipo == ""){
-echo "<div class='alert alert-info'> No se encontro ninguna reservaci&oacute;n. </div>";
+echo "<div class='alert alert-info'> No se encontro ninguna reservaci&oacute;n. </div>
+    <div class='alert alert-info'>Para reservas contactar al  (595 21) 492 051 / 052 / 053 / 054</div>
+    <div class='alert alert-info'>Consultar los Costos y Condiciones <a href='http://www.cajabancaria.gov.py/v2/index.php?option=com_content&view=article&id=84&Itemid=96' target='_blank'>Aqui</a></div>";
 }else{
-echo "<div class='alert alert-info'> El Local esta disponible. </div>";
+echo "<div class='alert alert-info'> El Local esta disponible. </div>
+    <div class='alert alert-info'>Para reservas contactar al  (595 21) 492 051 / 052 / 053 / 054</div>
+    <div class='alert alert-info'>Consultar los Costos y Condiciones <a href='http://www.cajabancaria.gov.py/v2/index.php?option=com_content&view=article&id=84&Itemid=96' target='_blank'>Aqui</a></div>";
+
 }
 }else{
 $results = "";
 $results = "
+<div class='alert alert-info'>Para reservas contactar al  (595 21) 492 051 / 052 / 053 / 054</div>
 <table class='table table-bordered' style='font-size:12px'>
 <thead>
 <tr>
@@ -121,7 +127,8 @@ $results = "
 </thead>
 <tbody>";
 $results .= $html;
-$results .= "</tbody></table>";
+$results .= "</tbody></table>
+    <div class='alert alert-info'>Consultar los Costos y Condiciones <a href='http://www.cajabancaria.gov.py/v2/index.php?option=com_content&view=article&id=84&Itemid=96' target='_blank'>Aqui</a></div>";
 echo $results;
 }	
 

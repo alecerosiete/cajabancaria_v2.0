@@ -227,9 +227,9 @@ function formatoFechaMMAAAA($fecha)
 
 function formatoFechaAAAAMMDD($fecha){
 	if(strlen($fecha) == 8){
-        return substr($fecha, 0, 4)."/".substr($fecha, 4, 2)."/".substr($fecha, 6, 2);
+        return substr($fecha, 6, 2)."/".substr($fecha, 4, 2)."/".substr($fecha, 0, 4);
     }else{
-        return substr($fecha, 0, 4)."/".substr($fecha, 4, 2)."/0".substr($fecha, 6, 2);
+        return substr($fecha, 6, 2)."/".substr($fecha, 4, 2)."/".substr($fecha, 0, 4);
     }
 }
 
@@ -238,11 +238,17 @@ function formatoDeTarjeta($tc)
     return substr($tc, 0,4)."-".substr($tc, 4,4)."-".substr($tc, 8,4)."-".substr($tc,12,4);
 }
 
-function formatoFechaDDMMAAAA($fecha)
+function 
+formatoFechaDDMMAAAA($fecha)
 {
     if(strlen($fecha) == 7){
         $fecha = "0".$fecha;
+    }else{
+        if(strlen($fecha) == 5){
+            return substr($fecha, 0,1)."-".substr($fecha, 1, 2)."-".substr($fecha, 3, 2);
+        }
     }
+        
     return substr($fecha, 0,2)."-".substr($fecha, 2, 2)."-".substr($fecha, 4, 4);
 }
 

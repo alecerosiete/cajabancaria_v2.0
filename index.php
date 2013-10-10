@@ -368,19 +368,27 @@ if($mensaje > 0 ){
            </div>
       </div>
       <!-- Fin Novedades -->
-      <hr>
-         <footer>
-        <div class="footer">
-             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2012 - Todos los Derechos Reservados - <a href="./terminos-y-condiciones.php">Terminos y Condiciones</a> -
-     www.cajabancaria.gov.py <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
-        </div> 
+      
+         
+             
+       
 
 
-    </footer>
-            <hr>
+    
+            
     </div> <!-- /container -->
-    
-    
+    <footer>
+		<div class="fluid">
+		<hr>
+		<div class="footer-full" style="color:#ffffff;width:100%;text-align:center;font-size:12px;background:url(./resources/images/bg.png) repeat-x; background: url(./resources/images/bg.png) repeat-x;background-position: bottom;height: 57px;padding-top: 20px;">
+             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2013 - Todos los Derechos Reservados - <a href="./terminos-y-condiciones.php" style="color:#ffffff" >Terminos y Condiciones</a> -
+			<a href="http://www.cajabancaria.gov.py" style="color:#ffffff" target="_blank">www.cajabancaria.gov.py</a> <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
+        </div> 
+        </div> 
+    </footer>
+      
+        <hr>
+        
     <input type="hidden" id="ci" value="<?= $userInfo[0]['CEDULA DE IDENTIDAD'] ?>">
     
     <!-- MENSAJES -->
@@ -427,9 +435,9 @@ if($mensaje > 0 ){
     
     <!-- Modal Modificar pin -->
        
-        <div id="modalChangePin" class="modal hide fade in" style="display: none;">
+        <div id="modalChangePin" class="modal hide fade in" data-backdrop="static" style="display: none;">
            <div class="modal-header">
-              <a data-dismiss="modal" class="close">×</a>
+              
               <h3 style='display:inline'>Modificacion del PIN de acceso </h3><a style='display:inline;s' href="#" class="btn btn-mini" data-toggle="popover" data-placement="bottom" data-content="Para aumentar la seguridad de su cuenta, le solicitamos el cambio de su PIN actual. Al cambiarlo guarde en un lugar seguro." title="" data-original-title="" id="ayudaCambioDePin">¿Que es esto?</a>
            </div>
             <div class="modal-body">
@@ -452,7 +460,7 @@ if($mensaje > 0 ){
            <div class="modal-footer">
                <div class="alert alert-info" style="width:500px;float:left;font-size:11px">Al guardar estoy aceptando todos los terminos y condiciones de uso del portal de la Caja Bancaria. <a href="#">Terminos y Condiciones</a></div>
                 <a href="#" id="btn-save-new-pin" class="btn btn-success">Guardar</a>
-                <a href="#" id="user-change-pin-close" data-dismiss="modal" class="btn">Cerrar</a>
+                <a href="./actions/login.exit.php" id="user-change-pin-close"  class="btn">Cerrar</a>
            </div>
           </div>
         

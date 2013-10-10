@@ -17,7 +17,7 @@
               <ul class="navigation">
                     <li><a href="./index.php">Inicio</a></li>
                     
-                    <li><a href="#">Beneficiarios</a>
+                    <li><a href="#">Consultas</a>
                         <ul>
                             <?php if(getRole(ROLE_JUBILADO) || getRole(ROLE_PENSIONADO)) echo "<li><a href='./jubilados.php'>Pagos</a></li>"; ?>
                             <li><a href="./prestamos.php">Prestamos</a></li>

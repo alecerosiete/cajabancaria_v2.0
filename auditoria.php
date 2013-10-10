@@ -155,16 +155,17 @@ $db = conect();
 
 
             </div><!-- /end hero-unit -->
- <hr>
-    <footer>
-        <div class="footer">
-             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2012 - Todos los Derechos Reservados
-     www.cajabancaria.gov.py <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
+            
+          </div> <!-- /container -->
+     <footer>
+		<div class="fluid">
+		<hr>
+		<div class="footer-full" style="color:#ffffff;width:100%;text-align:center;font-size:12px;background:url(./resources/images/bg.png) repeat-x; background: url(./resources/images/bg.png) repeat-x;background-position: bottom;height: 57px;padding-top: 20px;">
+             Caja de Jubilaciones y Pensiones de Empleados de Bancos y Afines del Paraguay &copy; 2013 - Todos los Derechos Reservados - <a href="./terminos-y-condiciones.php" style="color:#ffffff" >Terminos y Condiciones</a> -
+			<a href="http://www.cajabancaria.gov.py" style="color:#ffffff" target="_blank">www.cajabancaria.gov.py</a> <br> Humaita 357 e/Chile y Alberdi |(595 21) 492 051 / 052 / 053 / 054
+        </div> 
         </div> 
     </footer>
-<hr>             
-          </div> <!-- /container -->
-    
     <?php require './inc/footer.php'; ?>
     
     <script type="text/javascript">
