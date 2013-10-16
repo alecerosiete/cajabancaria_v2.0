@@ -695,6 +695,26 @@ function consultar(){
 
 }
 
+function userSync(){
+
+        var $loading = $('#visualizar-usuario').html("<div class='progress progress-striped active'><div class='bar' style='width: 100%;'>Sincronizando usuarios.. </div></div>");
+        
+         $.ajax({
+             
+            type: "POST",
+            url: "./actions/user-sync.php",
+
+            }).done(function(data) {
+                if(data == 0){                    
+                    data = "<div class='alert alert-warning'>Nada que sincronizar..</div>";
+                }else{
+                    data = data+" usuarios sincronizado(s)";
+                }
+                $loading.html(data);
+         });
+        		
+}
+
 function verifyChangePin(){
         var ci = $("#ci").val();
 

@@ -428,3 +428,24 @@ function getMensajesLeidos($ci){
     $db = null;
     return $mensajes['CANT'];
 }
+
+function syncUser(){
+    $db = conect();
+    $sql = "INSERT IGNORE INTO sys_user
+        (   ci,
+            nombre,
+            password,
+            active,
+            tipo_de_usuario,
+            perfil_de_usuario,
+            fecha_registro,
+            padron,
+            accept_terms
+        )
+        SELECT `CEDULA DE IDENTIDAD`,`NOMBRE`,'12345',0,CASE WHEN BANCO = 77 THEN 'Jubilados' WHEN BANCO = 88 THEN 'Pensionados' ELSE 'Activo' END,'Activo',now(),PADRON,0 FROM pddirweb;";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $rowsAffected = $statement->rowCount();
+    $db = null;
+    return $rowsAffected;
+}

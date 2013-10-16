@@ -59,7 +59,7 @@ addEventAudit($user['CI'], $_SERVER['REQUEST_URI'],"Menu Usuarios - Actualizacio
                     <td>
                         <form class="form-search" style="margin-top:30px;" onSubmit="consultar();return false">
                             <input id="input-ci" placeholder="Cedula de identidad.."  type="text" class="input-xlarge search-query">
-                            <button type="submit" class="btn" id="btn-user-update">Buscar</button>&nbsp;&nbsp;<?php /*<a class="btn btn-success" href="./user-insert.php">Nuevo usuario</a>*/?>
+                            <button type="submit" class="btn" id="btn-user-update">Buscar</button>&nbsp;&nbsp;<div class="btn btn-success"  onClick="userSync();">Sincronizar</div>
                         </form>
                     </td>
                     <td>
