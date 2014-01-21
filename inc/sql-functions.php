@@ -444,7 +444,7 @@ function syncUser(){
             padron,
             accept_terms
         )
-        SELECT `CEDULA DE IDENTIDAD`,`NOMBRE`,'',1,CASE WHEN BANCO = 77 THEN 'Jubilados' WHEN BANCO = 88 THEN 'Pensionados' ELSE 'Activo' END,'Activo',now(),PADRON,0 FROM pddirweb;";
+        SELECT `CEDULA DE IDENTIDAD`,`NOMBRE`,'',1,CASE WHEN BANCO = 77 THEN 'Jubilado' WHEN BANCO = 88 THEN 'Pensionado' ELSE 'Activo' END,'Activo',now(),PADRON,0 FROM pddirweb;";
     $statement = $db->prepare($sql);
     $statement->execute();
     
@@ -462,30 +462,34 @@ function syncUser(){
     $statement->execute();
     $users = $statement->fetchAll();    
     error_log("PASA SELECT 2 SYS_USER");
-    if (count($users)){  
-        foreach ($users as $user){
-            $pin = getPin($long);
-            $ci = $user['ci'];
-            $sql = "UPDATE sys_user SET password = sha1('$pin') where ci = $ci ";
-                    error_log("My sql ".$sql);
-            $statement = $db->prepare($sql);
-            $statement->execute();
-            
-         }
-         error_log("PASA FOREACH");
+    $ci_pin = array();
+    foreach ($users as $user){
+        $pin = getPin($long);
+        $ci = $user['ci'];
+        if($user['password']==""){
+          $ci_pin[$ci] = $pin;
+        }
+       
+    }       
+    
+    foreach ($ci_pin as $ci => $pin) {
+        $sql = "INSERT INTO sys_user_temporal values('$ci','$pin') ";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        
+        $sql = "UPDATE sys_user SET password = sha1('$pin') where ci = $ci ";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+                
     }
-    
-           
-    
     $db = null;
     return $rowsAffected;
 }
 
-function getPin($long){
-        $caracteres='0123456789';
-        $longpalabra=$long;
-        for($pin='', $n=strlen($caracteres)-1; strlen($pin) < $longpalabra ; ) {          
-          $pin.= $caracteres[rand(0,$n)];
-        }  
-        return $pin;
+function getPin($long = 4){
+  $pin = "";  
+  while(strlen($pin)<$long){
+           $pin .= rand(0,9);
+  }
+  return $pin;
 }

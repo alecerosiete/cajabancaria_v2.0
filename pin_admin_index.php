@@ -1,5 +1,10 @@
 <?php
 require './inc/session.inc';
+$profile = getPerfil(ROLE_OPERATOR);
+if(!$profile){
+  addError("No tiene perfil de operador");
+  redirect(ROOT_PATH."/pin_admin_login.php");
+}
 assertUser();
 $user = getUser();
 require './inc/conexion-functions.php';
@@ -13,11 +18,7 @@ $userInfo = getUserInfo();
 $ciudad = getCiudad($userInfo[0]['CIUDAD']);
 $localidad = getLocalidad($userInfo[0]['LOCALIDAD']);
 $barrio = getBarrio($userInfo[0]['BARRIO']);
-$profile = getPerfil(ROLE_OPERATOR);
-if(!$profile){
-  print("No tiene perfil de operador");
-  redirect(ROOT_PATH."/pin_admin_login.php");
-}
+
 
 $mensajes = getMensajesPersonalizados($user['CI']);
 $mensajesLeidos = getMensajesLeidos($user['CI']);
@@ -116,7 +117,7 @@ if($mensaje > 0 ){
     <div class="container">
       <div class="header-caja-bancaria">
           <div class="btn-logout">
-              Conectado como: <?=$user['data']['nombre'] ?>  <a href="./pin_admin_login.php" class="btn btn-warning">Salir</a>
+              Conectado como: <?=$user['data']['nombre'] ?> <a href="./index.php" class="btn btn-primary">Volver al sistema</a>  <a href="./pin_admin_login.php" class="btn btn-warning">Salir</a>
           </div>
           <div class="alert-msg-show">
             <?php include("./tmpl/success_panel.inc")?>

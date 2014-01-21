@@ -3,7 +3,7 @@
 session_start();
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'cajaweb');
+define('DB_NAME', 'caja');
 define('DB_USER', 'caja');
 define('DB_PASSWORD', 'caja');
 

@@ -11,7 +11,7 @@ addEventAudit($ci, $_SERVER['REQUEST_URI'],"Menu Usuarios - Guardo nuevo PIN gen
     
 $pin = $_POST['pin'];
 $db = conect();
-$sql = "UPDATE sys_user SET password = '$pin' WHERE ci = '$ci'";
+$sql = "UPDATE sys_user SET password = sha1('$pin') WHERE ci = '$ci'";
 error_log($sql);
 $statement = $db->prepare($sql);
 $statement->execute();

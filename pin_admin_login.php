@@ -55,7 +55,7 @@ session_destroy();
     <div class="container" >
         
       <form class="form-signin" action="./actions/pin_admin_login.do.php" method="post">
-        <h2 class="form-signin-heading" >Acceso al sistema</h2>
+        <h2 style="text-align:center"><span style="font-size:26px">Administracion de PIN</span></h2>
         <input id="ci" type="text" class="input-block-level" placeholder="Cedula de Identidad" name="ci">
         <input id="pin" type="password" class="input-block-level" placeholder="Pin.." name="pin">
         <img align="left" style="width:172px;margin-bottom: 10px" id="captcha" src="./resources/securimage/securimage_show.php" alt="CAPTCHA Image" />

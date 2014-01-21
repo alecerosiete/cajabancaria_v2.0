@@ -56,6 +56,9 @@
                     <?php if(getPerfil(ROLE_AUDITOR)){?>
                      <li><a href='./auditoria.php'>Auditoria</a></li>
                     <?php } ?>
+                    <?php if(getPerfil(ROLE_OPERATOR)){?>
+                     <li><a href='./pin_admin_index.php'>Administrar Pin</a></li>
+                    <?php } ?>
                     <li><a href='./contacto.php'>Contacto</a></li>
                     
                 </ul>
