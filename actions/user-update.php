@@ -99,7 +99,7 @@ $perfil = consultaPerfil($ci);
                           
                          <select name="perfil_de_usuario" id="perfil_de_usuario">
                           <?php
-                            $perfiles = array("Activo","Directivo","Administrador","Auditor");
+                            $perfiles = array("Activo","Directivo","Administrador","Auditor","Operador");
                             $selected = "";
                             foreach ($perfiles as $p){
                                 if($p == $perfil['perfil_de_usuario']){

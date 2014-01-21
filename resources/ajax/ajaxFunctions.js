@@ -360,7 +360,7 @@ $(document).ready(function(){
                pin:pin
            }
            }).done(function() {
-               alert("Guardado")
+               window.location = "./pin_admin_index.php";
                
            });
            

@@ -15,6 +15,7 @@ $sql = "UPDATE sys_user SET password = '$pin' WHERE ci = '$ci'";
 error_log($sql);
 $statement = $db->prepare($sql);
 $statement->execute();
+setSuccess("Cambio de pin Exitoso");
 $db = null;
 exit();
 ?>

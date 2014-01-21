@@ -3,7 +3,7 @@
 session_start();
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'cajaweb');
+define('DB_NAME', 'caja');
 define('DB_USER', 'caja');
 define('DB_PASSWORD', 'caja');
 
@@ -13,6 +13,7 @@ define('ROLE_DIRECTIVO', 'Directivo');
 define('ROLE_JUBILADO', 'Jubilado');
 define('ROLE_PENSIONADO', 'Pensionado');
 define('ROLE_AUDITOR', 'Auditor');
+define('ROLE_OPERATOR','Operador');
 
 define('S_USER', 'user');
 define('S_ERROR_LIST', 'errors');
