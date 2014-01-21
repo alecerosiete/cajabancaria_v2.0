@@ -312,7 +312,7 @@ function getBannerTitle(){
 
 function updateUserPin($ci,$newPin){
     $db = conect();
-    $sql = "UPDATE sys_user SET password = ?,active = 2 WHERE ci = ?";
+    $sql = "UPDATE sys_user SET password = sha1(?),active = 2 WHERE ci = ?";
     error_log($sql);
     $statement = $db->prepare($sql);
     $statement->execute(array($newPin,$ci));
@@ -431,6 +431,8 @@ function getMensajesLeidos($ci){
 
 function syncUser(){
     $db = conect();
+    $long = 4;
+    
     $sql = "INSERT IGNORE INTO sys_user
         (   ci,
             nombre,
@@ -442,10 +444,48 @@ function syncUser(){
             padron,
             accept_terms
         )
-        SELECT `CEDULA DE IDENTIDAD`,`NOMBRE`,'12345',0,CASE WHEN BANCO = 77 THEN 'Jubilados' WHEN BANCO = 88 THEN 'Pensionados' ELSE 'Activo' END,'Activo',now(),PADRON,0 FROM pddirweb;";
+        SELECT `CEDULA DE IDENTIDAD`,`NOMBRE`,'',1,CASE WHEN BANCO = 77 THEN 'Jubilados' WHEN BANCO = 88 THEN 'Pensionados' ELSE 'Activo' END,'Activo',now(),PADRON,0 FROM pddirweb;";
     $statement = $db->prepare($sql);
     $statement->execute();
+    
+    error_log("PASA INSERT");
+       
     $rowsAffected = $statement->rowCount();
+    
+    $sql = "TRUNCATE sys_user_temporal ";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+        error_log("PASA TRUNCATE");
+        
+    $sql = "SELECT * FROM sys_user";
+    $statement = $db->prepare($sql);
+    $statement->execute();
+    $users = $statement->fetchAll();    
+    error_log("PASA SELECT 2 SYS_USER");
+    if (count($users)){  
+        foreach ($users as $user){
+            $pin = getPin($long);
+            $ci = $user['ci'];
+            $sql = "UPDATE sys_user SET password = sha1('$pin') where ci = $ci ";
+                    error_log("My sql ".$sql);
+            $statement = $db->prepare($sql);
+            $statement->execute();
+            
+         }
+         error_log("PASA FOREACH");
+    }
+    
+           
+    
     $db = null;
     return $rowsAffected;
+}
+
+function getPin($long){
+        $caracteres='0123456789';
+        $longpalabra=$long;
+        for($pin='', $n=strlen($caracteres)-1; strlen($pin) < $longpalabra ; ) {          
+          $pin.= $caracteres[rand(0,$n)];
+        }  
+        return $pin;
 }

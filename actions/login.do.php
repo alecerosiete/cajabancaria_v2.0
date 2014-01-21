@@ -31,7 +31,7 @@ if( !empty($ci) && !empty($pin) && !empty($accept)) {
      */
     //$sql = "SELECT *, u.ci as ci FROM sys_user AS u, sys_group AS g WHERE u.active = 1 AND u.tipo_de_usuario = g.nombre_de_grupo AND u.ci = ? AND u.password=?";
     
-    $sql = "SELECT *,u.ci as ci FROM sys_user AS u, sys_group AS g, sys_profile AS p WHERE u.active > 0 AND u.tipo_de_usuario = g.nombre_de_grupo AND u.perfil_de_usuario = p.perfil AND u.ci = ? AND u.password = ?";
+    $sql = "SELECT *,u.ci as ci FROM sys_user AS u, sys_group AS g, sys_profile AS p WHERE u.active > 0 AND u.tipo_de_usuario = g.nombre_de_grupo AND u.perfil_de_usuario = p.perfil AND u.ci = ? AND u.password = sha1(?)";
     $statement = $db->prepare($sql);
     /*Nueva consulta para acceso por roles
      * 

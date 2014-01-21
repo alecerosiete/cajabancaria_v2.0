@@ -16,7 +16,7 @@ $statement = $db->prepare($sql);
 $statement->execute(array($ci));
 $item = $statement->fetch(PDO::FETCH_ASSOC);
 echo $item['password'];
-if($item['password'] == $pin) {
+if($item['password'] == sha1($pin)) {
     updateUserPin($ci,$newPin);
     setSuccess("Su Pin se ha modificado con Éxito!");
     echo 1;
